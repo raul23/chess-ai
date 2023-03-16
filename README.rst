@@ -87,8 +87,8 @@ In order of importance, these are the things missing in this Chess project:
 
   - Encastling
   - En passant
-- Highlight the clicked piece: when the user click on a piece, it should be highlighted and if they click another piece, then
-  the new piece should be the only highlighted
+- Highlight the clicked piece: when the user clicks on a piece, it should be highlighted and if they click another piece, then
+  the new piece should be the only one highlighted
 - Add score
 - Add an options menu
 - Add a timer
