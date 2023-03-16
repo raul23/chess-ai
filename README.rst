@@ -81,6 +81,7 @@ In order of importance, these are the things missing in this Chess project:
 
 - No game AI yet!
 - Add ending code: right now the game doesn't end when you do checkmate
+- Add restart button: right now on codepen.io, you have to click on Run (if not on or refresh
 - Test the following moves:
 
   - Encastling
@@ -89,6 +90,7 @@ In order of importance, these are the things missing in this Chess project:
   the new piece should be the only highlighted
 - Add score
 - Menu options
+- Add a timer
 - ...
 
 Books
