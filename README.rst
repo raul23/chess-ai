@@ -30,6 +30,8 @@ based on the following two JavaScript libraries:
 `:information_source:`
 
  **ChessJs:** A simple chess game made with Javascript and Phaser
+ 
+ Developed by `Jexan <https://github.com/Jexan>`_
 
 I tried to run the actual project with these old libraries but couldn't make the game work
 as can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
