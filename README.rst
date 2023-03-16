@@ -29,7 +29,7 @@ based on the following two JavaScript libraries:
 
 `:information_source:`
 
- **ChessJs:** A simple chess game made with Javascript and Phaser
+ `ChessJs <https://github.com/Jexan/ChessJs>`_: A simple chess game made with Javascript and Phaser
  
  Developed by `Jexan <https://github.com/Jexan>`_
 
