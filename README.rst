@@ -27,7 +27,7 @@ based on the following two JavaScript libraries:
 - `Phaser v2.0.5 <https://github.com/Jexan/ChessJs/blob/master/lib/phaser.min.js>`_
 - `Underscore.js 1.6.0 <https://github.com/Jexan/ChessJs/blob/master/lib/underscore-min.js>`_
 
-I tried to run the actual project with these outdated libraries but couldn't make the game work
+I tried to run the actual project with these old libraries but couldn't make the game work
 as can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
 
 Therefore I decided to use the latest libraries (phaser@3.55.2 and underscore@1.13.6) which resulted
