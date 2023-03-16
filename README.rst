@@ -52,8 +52,8 @@ Test it live and source code
 
  I will add the source code on GitHub later
 
-Instructions [TODO]
--------------------
+Instructions
+------------
 - **Highlighted moves:** when clicking on one of your game pieces, squares get highlighted on the chessboard to let
   you know which possible moves you can make with the given piece. Click on one of the highlighted square to move the piece.
   
