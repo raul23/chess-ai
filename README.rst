@@ -82,6 +82,9 @@ Instructions
        </a>
      </div>
 
+Game AI [TODO]
+==============
+
 Things still missing
 --------------------
 In order of importance, these are the things missing in this Chess project:
