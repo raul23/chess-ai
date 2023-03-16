@@ -21,7 +21,8 @@ JavaScript implementation: upgraded Jexan's ChessJs to Phaser 3 [Work-in-Progres
 
 Introduction
 ------------
-Jexan's `ChessJs <https://github.com/Jexan/ChessJs>`_ is based on the following two libraries:
+I started from Jexan's `ChessJs <https://github.com/Jexan/ChessJs>`_ which is 
+based on the following two JavaScript libraries:
 
 - `Phaser v2.0.5 <https://github.com/Jexan/ChessJs/blob/master/lib/phaser.min.js>`_
 - `Underscore.js 1.6.0 <https://github.com/Jexan/ChessJs/blob/master/lib/underscore-min.js>`_
@@ -58,6 +59,7 @@ Things still missing
 --------------------
 In order of importance, these are the things missing in this Chess project:
 
+- No game AI yet!
 - Add ending code: right now the game doesn't end when you do checkmate
 - Add score
 - ...
