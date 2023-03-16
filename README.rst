@@ -1,7 +1,7 @@
 ========
 Chess-AI
 ========
-Exploring AI applied to the chess
+Exploring AI applied to chess
 
 Books
 =====
