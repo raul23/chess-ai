@@ -45,7 +45,7 @@ being the game AI.
 
 Test it live and source code
 ----------------------------
-- `codepen.io <https://codepen.io/raul23/full/xxaWEzy>`_ (**Test it live!** with fullscreen)
+- `codepen.io <https://codepen.io/raul23/full/xxaWEzy>`_ (**Test it live** with fullscreen)
 - `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_ (source code)
 
 `:information_source:`
