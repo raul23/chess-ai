@@ -52,11 +52,28 @@ Test it live and source code
 
  I will add the source code on GitHub later
 
-Features [TODO]
----------------
-
 Instructions [TODO]
 -------------------
+- **Highlighted moves:** when clicking on one of your game pieces, squares get highlighted on the chess board to let
+  you know which possible moves you can make with the given piece. Click on one of the highlighted square to move the piece.
+  
+  .. raw:: html
+
+      <div align="center">
+       <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
+         <img src="./images/chess_highlighted.png">
+       </a>
+       <p align="center">Highlighted moves for the black bishop</p>
+     </div>
+- Each pawn has the possibility to move two squares in front when it is the first time it is moved
+
+  .. raw:: html
+
+      <div align="center">
+       <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
+         <img src="./images/chess_pawn_two_squares.png">
+       </a>
+     </div>
 
 Things still missing
 --------------------
@@ -65,6 +82,8 @@ In order of importance, these are the things missing in this Chess project:
 - No game AI yet!
 - Add ending code: right now the game doesn't end when you do checkmate
 - Add score
+- Add option to choose which color of pieces to use
+- Menu options
 - ...
 
 Books
