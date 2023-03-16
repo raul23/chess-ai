@@ -40,7 +40,7 @@ in modifying some parts of the code such as these:
 - ``image.setInteractive()`` instead of ``image.inputEnabled = true``
 - ``image.on('pointerdown', () => {})`` instead of ``image.events.onInputDown.add(() => {})``
 
-The game now runs but there are still `some things to be done <#things-still-missing>`_ with the most important thing missing
+The game now runs "fine" but there are still `some things to be done <#things-still-missing>`_ with the most important thing missing
 being the game AI.
 
 Test it live and source code
