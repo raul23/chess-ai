@@ -39,11 +39,11 @@ Therefore I decided to use the latest libraries (``phaser@3.55.2`` and ``undersc
 in modifying some parts of the code such as these:
 
 - ``add.sprite`` instead of ``add.image``
-- ``image.scaleX`` instead of ``image.scale.x``
-- ``image.destroy()`` instead of ``image.kill()``
 - ``group.clear(true)`` instead of ``group.removeAll()``
-- ``image.setInteractive()`` instead of ``image.inputEnabled = true``
+- ``image.destroy()`` instead of ``image.kill()``
 - ``image.on('pointerdown', () => {})`` instead of ``image.events.onInputDown.add(() => {})``
+- ``image.scaleX`` instead of ``image.scale.x``
+- ``image.setInteractive()`` instead of ``image.inputEnabled = true``
 
 The game now runs "fine" but there are still `some things to be done <#things-still-missing>`_ with the most important element missing
 being the game AI.
