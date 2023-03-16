@@ -65,7 +65,7 @@ Instructions
        </a>
        <p align="center">Highlighted moves for the black bishop</p>
      </div>
-- Each pawn has the possibility to move two squares in front when it is the first time it is moved
+- Each pawn has the possibility to move two squares in front when it is moved for the first time
 
   .. raw:: html
 
