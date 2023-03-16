@@ -49,6 +49,7 @@ Test it live and source code
 - `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_ (source code)
 
 `:information_source:`
+ 
  Obviously, on codepen.io, the whole code is on one file. However, the source code will be divided into
  different files (e.g. Game.js, Piece.js) just like the original chess project `ChessJs <https://github.com/Jexan/ChessJs>`_.
  
