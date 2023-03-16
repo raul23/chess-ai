@@ -48,8 +48,8 @@ in modifying some parts of the code such as these:
 The game now runs "fine" but there are still `some things to be done <#things-still-missing>`_ with the most important element missing
 being the game AI.
 
-Test it live and source code
-----------------------------
+Test it live and source code ⭐
+-------------------------------
 - `codepen.io <https://codepen.io/raul23/full/xxaWEzy>`_ (**Test it live** with fullscreen)
 - `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_ (source code)
 
