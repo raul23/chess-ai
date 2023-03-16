@@ -92,6 +92,12 @@ In order of importance, these are the things missing in this Chess project:
 
 - No game AI yet!
 - Add ending code: right now the game doesn't end when you do checkmate
+
+  These are the game states that need to be checked:
+  
+  - check
+  - checkmate
+  - stalemate
 - Add restart button: right now on `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_, you 
   have to click on Run (if not on fullscreen) or refresh the page
 - Test the following moves:
