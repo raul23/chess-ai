@@ -21,17 +21,16 @@ JavaScript implementation: upgraded Jexan's ChessJs to Phaser 3 [Work-in-Progres
 
 Introduction
 ------------
-I started from Jexan's `ChessJs <https://github.com/Jexan/ChessJs>`_ which is 
-based on the following two JavaScript libraries:
-
-- `Phaser v2.0.5 <https://github.com/Jexan/ChessJs/blob/master/lib/phaser.min.js>`_
-- `Underscore.js 1.6.0 <https://github.com/Jexan/ChessJs/blob/master/lib/underscore-min.js>`_
-
 `:information_source:`
 
  `ChessJs <https://github.com/Jexan/ChessJs>`_: A simple chess game made with Javascript and Phaser
  
  Developed by `Jexan <https://github.com/Jexan>`_
+ 
+I started from Jexan's **ChessJs** which is based on the following two JavaScript libraries:
+
+- `Phaser v2.0.5 <https://github.com/Jexan/ChessJs/blob/master/lib/phaser.min.js>`_
+- `Underscore.js 1.6.0 <https://github.com/Jexan/ChessJs/blob/master/lib/underscore-min.js>`_
 
 I tried to run the actual project with these old libraries but couldn't make the game work
 as can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
