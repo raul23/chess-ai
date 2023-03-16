@@ -89,7 +89,7 @@ In order of importance, these are the things missing in this Chess project:
 - Highlight the clicked piece: when the user click on a piece, it should be highlighted and if they click another piece, then
   the new piece should be the only highlighted
 - Add score
-- Menu options
+- Add an options menu
 - Add a timer
 - ...
 
