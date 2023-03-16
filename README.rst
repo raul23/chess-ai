@@ -81,7 +81,7 @@ In order of importance, these are the things missing in this Chess project:
 
 - No game AI yet!
 - Add ending code: right now the game doesn't end when you do checkmate
-- Add restart button: right now on codepen.io, you have to click on Run (if not on or refresh
+- Add restart button: right now on codepen.io, you have to click on Run (if not on fullscreen) or refresh the page
 - Test the following moves:
 
   - Encastling
