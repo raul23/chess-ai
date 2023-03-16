@@ -81,6 +81,10 @@ In order of importance, these are the things missing in this Chess project:
 
 - No game AI yet!
 - Add ending code: right now the game doesn't end when you do checkmate
+- Test the following moves:
+
+  - Encastling
+  - En passant
 - Add score
 - Menu options
 - ...
