@@ -54,7 +54,7 @@ Test it live and source code
 
 Instructions [TODO]
 -------------------
-- **Highlighted moves:** when clicking on one of your game pieces, squares get highlighted on the chess board to let
+- **Highlighted moves:** when clicking on one of your game pieces, squares get highlighted on the chessboard to let
   you know which possible moves you can make with the given piece. Click on one of the highlighted square to move the piece.
   
   .. raw:: html
