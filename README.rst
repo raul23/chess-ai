@@ -83,7 +83,7 @@ Instructions
      </div>
 
 Game AI [TODO]
-==============
+--------------
 
 Things still missing
 --------------------
