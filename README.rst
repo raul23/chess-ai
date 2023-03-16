@@ -41,7 +41,7 @@ in modifying some parts of the code such as these:
 
 Test it live and source code
 ----------------------------
-- `codepen.io <https://codepen.io/raul23/full/xxaWEzy`_ (fullscreen; **Test it live!**)
+- `codepen.io <https://codepen.io/raul23/full/xxaWEzy>`_ (fullscreen; **Test it live!**)
 - `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_ (source code)
 
 `:information_source:`
