@@ -34,7 +34,7 @@ I started from Jexan's **ChessJs** which is based on the following two JavaScrip
 - `Underscore.js 1.6.0 <https://github.com/Jexan/ChessJs/blob/master/lib/underscore-min.js>`_
 
 I tried to run the actual project with these old libraries but couldn't make the game work
-as can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
+as it can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
 
 Therefore I decided to use the latest libraries (``phaser@3.55.2`` and ``underscore@1.13.6``) which resulted
 in modifying some parts of the code such as these:
