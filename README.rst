@@ -89,8 +89,8 @@ Game AI [TODO]
 --------------
 - Minimax with pruning
 
- - Search depth
- - Game scoring
+  - Search depth
+  - Game scoring
 - Game openings
 
 Things still missing
