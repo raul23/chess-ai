@@ -16,7 +16,8 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
     <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
       <img src="./images/chess_fullscreen.png">
     </a>
-    <p align="center">Work-in-Progress: no game AI implemented yet!</p>
+    <p align="center">Work-in-Progress: no game AI implemented yet! 
+    <br/><a href="https://codepen.io/raul23/full/xxaWEzy">Test it live.</a></p>
   </div>
 
 Introduction
