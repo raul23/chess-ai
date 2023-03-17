@@ -91,7 +91,7 @@ Game AI [TODO]
 
   - Search depth
   - Game scoring
-- Chess openings
+- Playbook with chess openings
 
 Things still missing
 --------------------
