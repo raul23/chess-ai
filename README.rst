@@ -91,7 +91,7 @@ Game AI [TODO]
 
   - Search depth
   - Game scoring
-- Game openings
+- Chess openings
 
 Things still missing
 --------------------
