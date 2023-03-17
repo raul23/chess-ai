@@ -87,7 +87,7 @@ Instructions
 
 Game AI [TODO]
 --------------
-- Minimax with pruning
+- Minimax with AlphaBeta pruning
 
   - Search depth
   - Game scoring
