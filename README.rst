@@ -88,7 +88,9 @@ Instructions
 Game AI [TODO]
 --------------
 - Minimax with pruning
-- Search depth
+
+ - Search depth
+ - Game scoring
 - Game openings
 
 Things still missing
