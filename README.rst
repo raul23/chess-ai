@@ -123,7 +123,7 @@ Books
 - Roberts, Paul. `Artificial Intelligence in Games 
   <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. CRC Press, 2022.
   
-  **Chapter 8: Chess AI**
+  **Chapter 8: Chess AI**, pp.195-225
   
 - Sadler, Matthew, and Natasha Regan. `Game Changer: AlphaZero’s Groundbreaking Chess Strategies and the Promise of AI 
   <https://www.amazon.com/Game-Changer-AlphaZeros-Groundbreaking-Strategies/dp/9056918184>`_. New In Chess,Csi, 2019.
