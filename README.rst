@@ -89,17 +89,45 @@ Instructions
 
 Game AI
 -------
+I ported the game AI implemented as C# (+ Unity) code from Paul Roberts' book 
+`Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_ to 
+JavaScript using the ``phase.js`` 2D game development library.
+
+The game AI consists of the following two elements:
+
 - Minimax with AlphaBeta pruning
 
-  - Search depth
-  - Game scoring
+  - Search depth (by default is 1)
+  - Game scoring: every possible move is scored based on the following parameters
+    
+    Scores for each game piece:
+    
+    - ``PawnScore        = 2``
+    - ``KnightScore      = 10``
+    - ``BishopScore      = 10``
+    - ``RookScore        = 25``
+    - ``QueenScore       = 50``
+    - ``KingScore        = 100``
+    
+    Scores based on the state of the game:
+    
+    - ``CheckScore       = 20``
+    - ``CheckmateScore   = 1000``
+    - ``StalemateScore   = 25``: "Tricky one because sometimes you want this, sometimes you don't."
+    
+    Weights for each type of scores:
+    
+    - ``PieceWeight      = 4``: "Scores as above."
+    - ``MoveWeight       = 2``: "Number of moves available to pieces."
+    - ``PositionalWeight = 1``: "Whether in CHECK, CHECKMATE or STALEMATE."
 - Playbook with chess openings
 
 Things still missing
 --------------------
 In order of importance, these are the things missing in this Chess project:
 
-- No game AI yet!
+- Game AI stills needs to be fixed for search depths greater than 2: at these search depths, the
+  agent doesn't make good decisions for very basic plays
 - Add ending code: right now the game doesn't end when you do checkmate
 
   These are the game states that need to be checked:
