@@ -16,7 +16,7 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
     <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
       <img src="./images/chess_fullscreen.png">
     </a>
-    <p align="center">Work-in-Progress: no game AI implemented yet! 
+    <p align="center">Work-in-Progress 
     <br/><a href="https://codepen.io/raul23/full/xxaWEzy">Test it live.</a></p>
   </div>
 
@@ -46,8 +46,10 @@ in modifying some parts of the code such as these:
 - ``image.scaleX`` instead of ``image.scale.x``
 - ``image.setInteractive()`` instead of ``image.inputEnabled = true``
 
-The game now runs "fine" but there are still `some things to be done <#things-still-missing>`_ with the most important element missing
-being the game AI.
+Thereafter, I implemented the game AI in the form of `Minimax with AlphaBeta pruning <#game-ai>`_ based on the
+C# code by Paul Roberts' book `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. 
+
+The game now runs "fine" but there are still `some things to be done <#things-still-missing>`_.
 
 Test it live and source code ⭐
 -------------------------------
@@ -85,8 +87,8 @@ Instructions
        </a>
      </div>
 
-Game AI [TODO]
---------------
+Game AI
+-------
 - Minimax with AlphaBeta pruning
 
   - Search depth
