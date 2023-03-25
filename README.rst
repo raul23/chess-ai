@@ -49,7 +49,7 @@ in modifying some parts of the code such as these:
 Thereafter, I implemented the game AI in the form of `Minimax with AlphaBeta pruning <#game-ai>`_ based on the
 C# code by Paul Roberts' book `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. 
 
-The game now runs "fine" but there are still `some things to be done <#things-still-missing>`_.
+The game now runs "fine" but there are still `some things to be done <#things-to-be-done>`_.
 
 Test it live and source code ⭐
 -------------------------------
@@ -122,8 +122,8 @@ The game AI consists of the following two elements:
     - ``PositionalWeight = 1``: "Whether in CHECK, CHECKMATE or STALEMATE."
 - Playbook with chess openings
 
-Things still missing
---------------------
+Things to be done
+-----------------
 In order of importance, these are the things missing in this Chess project:
 
 - Game AI stills needs to be fixed for search depths greater than 2: at these search depths, the
