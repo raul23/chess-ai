@@ -13,11 +13,11 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
 .. raw:: html
 
    <div align="center">
-    <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
+    <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
       <img src="./images/chess_fullscreen.png">
     </a>
     <p align="center">Work-in-Progress 
-    <br/><a href="https://codepen.io/raul23/full/xxaWEzy">Test it live.</a></p>
+    <br/><a href="https://codepen.io/raul23/full/eYLLJbJ">Test it live.</a></p>
   </div>
 
 Introduction
@@ -53,12 +53,12 @@ The game now runs "fine" but there are still `some things to be done <#things-st
 
 Test it live and source code ⭐
 -------------------------------
-- `codepen.io <https://codepen.io/raul23/full/xxaWEzy>`_ (**Test it live** with fullscreen)
-- `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_ (source code)
+- `codepen.io <https://codepen.io/raul23/full/eYLLJbJ>`_ (**Test it live** with fullscreen)
+- `codepen.io <https://codepen.io/raul23/pen/eYLLJbJ>`_ (source code)
 
 `:information_source:`
  
- Obviously, on `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_, the whole code is in one file. However, 
+ Obviously, on `codepen.io <https://codepen.io/raul23/full/eYLLJbJ>`_, the whole code is in one file. However, 
  the source code on GitHub will be divided into
  different files (e.g. Game.js, Piece.js) just like the original chess project `ChessJs <https://github.com/Jexan/ChessJs>`_.
  
@@ -72,7 +72,7 @@ Instructions
   .. raw:: html
 
       <div align="center">
-       <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
+       <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
          <img src="./images/chess_highlighted.png">
        </a>
        <p align="center">Highlighted moves for the black bishop</p>
@@ -82,7 +82,7 @@ Instructions
   .. raw:: html
 
       <div align="center">
-       <a href="https://codepen.io/raul23/full/xxaWEzy" target="_blank">
+       <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
          <img src="./images/chess_pawn_two_squares.png">
        </a>
      </div>
@@ -135,7 +135,7 @@ In order of importance, these are the things missing in this Chess project:
   - check
   - checkmate
   - stalemate
-- Add restart button: right now on `codepen.io <https://codepen.io/raul23/pen/xxaWEzy>`_, you 
+- Add restart button: right now on `codepen.io <https://codepen.io/raul23/pen/eYLLJbJ>`_, you 
   have to click on Run (if not on fullscreen) or refresh the page
 - Test the following moves:
 
