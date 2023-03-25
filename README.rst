@@ -140,8 +140,8 @@ very basic plays such as the king will kill a pawn even though it will place it 
 
 `:information_source:`
 
- I need to check the minimax implementation line by line to see where the problem lies so that the agent can
- offer a true challenge to its opponents.
+ I need to check the minimax implementation line by line to see where the problem lies so that it can be fixed and hence the agent will be
+ able to offer a true challenge to its opponents.
 
 Things to be done
 -----------------
