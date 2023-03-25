@@ -123,7 +123,17 @@ The game AI consists of the following two elements:
     - ``PositionalWeight = 1``: "Whether in CHECK, CHECKMATE or STALEMATE."
     
     Then, the scores are combined as followed: ``PieceScore * PieceWeight) + (moveScore * MoveWeight) + (PositionalScore * PositionalWeight``
-- Playbook with chess openings
+- Playbook with the following chess openings (one of them is choosen randomly by the AI to start the game):
+
+  - Ruy Lopez
+  - Sicilian Defence
+  - Queens Gambit
+  - Alekhine Defence
+  - Modern Defence
+  - Kings Indian
+  - English Opening
+  - Dutch Defence
+  - Stonewall Attack
 
 However, I left the search depth to 1 by default because at search depths greater than 2, the agent makes very poor decisions for
 very basic plays such as the king will kill a pawn even though it will place it in check.
@@ -136,6 +146,11 @@ very basic plays such as the king will kill a pawn even though it will place it 
 Things to be done
 -----------------
 In order of importance, these are the things still to be for this Chess project:
+
+- The following two bugs:
+
+  - in ``makeAMove()``, the object ``piece`` can be null which shouldn't be the case
+  - when your opponent's king is killed, the game is not stopped right away but enters into an infinite loop
 
 - Game AI stills needs to be fixed: the agent makes poor decisions for very basic plays.
   
