@@ -120,14 +120,24 @@ The game AI consists of the following two elements:
     - ``PieceWeight      = 4``: "Scores as above."
     - ``MoveWeight       = 2``: "Number of moves available to pieces."
     - ``PositionalWeight = 1``: "Whether in CHECK, CHECKMATE or STALEMATE."
+    
+    Then, the scores are combined as followed: ``PieceScore * PieceWeight) + (moveScore * MoveWeight) + (PositionalScore * PositionalWeight``
 - Playbook with chess openings
+
+However, I left the search depth to 1 by default because at search depths greater than 2, the agent makes very poor decisions for
+very basic plays such as the king will kill a pawn even though it will place it in check.
+
+`:information_source:`
+
+ I need to check the minimax implementation line by line to see where the problem lies so that the agent can
+ offer a true challenge to its opponents.
 
 Things to be done
 -----------------
-In order of importance, these are the things missing in this Chess project:
+In order of importance, these are the things still to be for this Chess project:
 
-- Game AI stills needs to be fixed for search depths greater than 2: at these search depths, the
-  agent doesn't make good decisions for very basic plays
+- Game AI stills needs to be fixed: the agent makes poor decisions for very basic plays.
+  
 - Add ending code: right now the game doesn't end when you do checkmate
 
   These are the game states that need to be checked:
@@ -135,12 +145,12 @@ In order of importance, these are the things missing in this Chess project:
   - check
   - checkmate
   - stalemate
-- Add restart button: right now on `codepen.io <https://codepen.io/raul23/pen/eYLLJbJ>`_, you 
-  have to click on Run (if not on fullscreen) or refresh the page
 - Test the following moves:
 
   - Encastling
   - En passant
+- Add restart button: right now on `codepen.io <https://codepen.io/raul23/pen/eYLLJbJ>`_, you 
+  have to click on Run (if not on fullscreen) or refresh the page
 - Highlight the clicked piece: when the user clicks on a piece, it should be highlighted and if they click another piece, then
   the new piece should be the only one highlighted
 - Add score
