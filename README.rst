@@ -16,7 +16,7 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
     <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
       <img src="./images/chess_fullscreen.png">
     </a>
-    <p align="center">Work-in-Progress: AI controls the black pieces and the user, the white ones.
+    <p align="center">AI controls the black pieces and the user, the white ones.
     <br/><a href="https://codepen.io/raul23/full/eYLLJbJ">Test it live.</a></p>
   </div>
 
