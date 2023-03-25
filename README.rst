@@ -135,7 +135,7 @@ The game AI consists of the following two elements:
   - Dutch Defence
   - Stonewall Attack
   
-  `information_source:` one of these openings is choosen randomly by the AI to start the game
+  `:information_source:` one of these openings is choosen randomly by the AI to start the game
 
 However, I left the search depth to 1 by default because at search depths greater than 2, the agent makes very poor decisions for
 very basic plays such as the king will kill a pawn even though it will place it in check.
