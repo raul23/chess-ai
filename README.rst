@@ -141,10 +141,10 @@ The game AI consists of the following two elements:
   
    One of these openings is choosen randomly by the AI to start its game.
 
-However, I left the search depth to 1 by default because at search depths greater than 2, the agent makes very poor decisions for
-very basic plays such as the king will kill a pawn even though it will place it in check.
+`:warning:`
 
-`:information_source:`
+ However, I left the search depth to 1 by default because at search depths greater than 2, the agent makes very poor decisions for
+ very basic plays such as the king will kill a pawn even though it will place it in check.
 
  I need to check the minimax implementation line by line to see where the problem lies so that it can be fixed and hence the agent will be
  able to offer a true challenge to its opponents.
