@@ -122,7 +122,7 @@ The game AI consists of the following two elements:
     - ``MoveWeight       = 2``: "Number of moves available to pieces."
     - ``PositionalWeight = 1``: "Whether in CHECK, CHECKMATE or STALEMATE."
     
-    Then, the scores are combined into one overall score as followed: 
+    Then, the scores are combined into one overall score as follows: 
     
     ``(PieceScore * PieceWeight) + (moveScore * MoveWeight) + (PositionalScore * PositionalWeight)``
 - Playbook with the following chess openings:
