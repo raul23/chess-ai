@@ -153,11 +153,6 @@ Things to be done
 -----------------
 In order of importance, these are the things still to be done for this Chess project:
 
-- The following two bugs:
-
-  - in ``makeAMove()``, the object ``piece`` can be null which shouldn't be the case
-  - when your opponent's king is killed, the game is not stopped right away but enters into an infinite loop
-
 - Game AI stills needs to be fixed: the agent makes poor decisions for very basic plays
   
 - Add ending code: right now the game doesn't end when you do checkmate
