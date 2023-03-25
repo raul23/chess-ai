@@ -92,7 +92,7 @@ Game AI
 -------
 I ported the game AI implemented as C# (+ Unity) code from Paul Roberts' book 
 `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_ to 
-JavaScript using the ``phase.js`` 2D game development library.
+JavaScript using the ``phaser.js`` 2D game development library.
 
 The game AI consists of the following two elements:
 
