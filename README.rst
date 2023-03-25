@@ -151,7 +151,7 @@ The game AI consists of the following two elements:
 
 Things to be done
 -----------------
-In order of importance, these are the things still to be for this Chess project:
+In order of importance, these are the things still to be done for this Chess project:
 
 - The following two bugs:
 
