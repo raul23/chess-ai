@@ -128,13 +128,13 @@ The game AI consists of the following two elements:
 - Playbook with the following chess openings:
 
   - Ruy Lopez
-  - Sicilian Defence
-  - Queens Gambit
-  - Alekhine Defence
-  - Modern Defence
-  - Kings Indian
+  - Sicilian Defense
+  - Queen's Gambit
+  - Alekhine Defense
+  - Modern Defense
+  - King's Indian Defense
   - English Opening
-  - Dutch Defence
+  - Dutch Defense
   - Stonewall Attack
   
   `:information_source:` 
