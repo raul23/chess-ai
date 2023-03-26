@@ -14,7 +14,7 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
 
    <div align="center">
     <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
-      <img src="./images/chess_fullscreen.png">
+      <img src="./images/chess_fullscreen2.png">
     </a>
     <p align="center">AI controls the black pieces and the user, the white ones.
     <br/><a href="https://codepen.io/raul23/full/eYLLJbJ">Test it live.</a></p>
@@ -74,7 +74,7 @@ Instructions
 
       <div align="center">
        <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
-         <img src="./images/chess_highlighted.png">
+         <img src="./images/chess_highlighted2.png">
        </a>
        <p align="center">Highlighted moves for the black bishop</p>
      </div>
@@ -84,7 +84,7 @@ Instructions
 
       <div align="center">
        <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
-         <img src="./images/chess_pawn_two_squares.png">
+         <img src="./images/chess_pawn_two_squares2.png">
        </a>
      </div>
 
