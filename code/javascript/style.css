@@ -1,0 +1,14 @@
+body {
+  background-color: #ccc;
+}
+
+#gameDiv, h1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-family: Segoe UI;
+}
+
+canvas {
+  border: 1px solid #ccc;
+}
