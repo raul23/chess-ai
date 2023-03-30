@@ -13,11 +13,11 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
 .. raw:: html
 
    <div align="center">
-    <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
-      <img src="./images/chess_fullscreen2.png">
+    <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/chess_fullscreen.png">
     </a>
     <p align="center">AI controls the black pieces and the user, the white ones.
-    <br/><a href="https://codepen.io/raul23/full/eYLLJbJ">Test it live.</a></p>
+    <br/><a href="https://codepen.io/raul23/full/WNgPJJj">Test it live.</a></p>
   </div>
 
 Introduction
