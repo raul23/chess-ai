@@ -145,19 +145,9 @@ The game AI consists of the following two elements:
   
    One of these openings is choosen randomly by the AI to start its game.
 
-`:warning:`
-
- However, I left the search depth to 1 by default because at search depths greater than 2, the agent makes very poor decisions for
- very basic plays such as the king will kill a pawn even though it will place it in check.
-
- I need to check the minimax implementation line by line to see where the problem lies so that it can be fixed and hence the agent will be
- able to offer a true challenge to its opponents.
-
 Things to be done
 -----------------
 In order of importance, these are the things still to be done for this Chess project:
-
-- Game AI stills needs to be fixed: the agent makes poor decisions for very basic plays
   
 - Add ending code: right now the game doesn't end when you do checkmate
 
