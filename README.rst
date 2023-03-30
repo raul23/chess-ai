@@ -71,7 +71,7 @@ Instructions
        <p align="center">Highlighted moves for the bishop</p>
      </div>
      
-  Only valid possibles moves are highlighted, in particular those that could put you in check are not shown.
+  Only possibles moves that are valid get highlighted, in particular those that could put you in check are not shown.
   
   .. raw:: html
 
