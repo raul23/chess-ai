@@ -68,7 +68,7 @@ Instructions
        <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
          <img src="./images/chess_highlighted.png">
        </a>
-       <p align="center">Highlighted moves for the bishop</p>
+       <p align="center">Highlighted moves for the Bishop</p>
      </div>
      
   Only possibles moves that are valid get highlighted, in particular those that could put you in check are not shown.
@@ -79,7 +79,7 @@ Instructions
        <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
          <img src="./images/chess_highlighted_valid_only.png">
        </a>
-       <p align="center">Highlighted moves for the white queen: those that could put you in check are not shown</p>
+       <p align="center">Highlighted moves for the white Queen: those that could put you in check are not shown</p>
      </div>
   
 - Each pawn has the possibility to move two squares in front when it is moved for the first time.
