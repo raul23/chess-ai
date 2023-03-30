@@ -2216,7 +2216,7 @@ class ChessPlayerAI extends ChessPlayer {
 			}
 		}
 
-		//Return the overall score for this board.
+		// Return the overall score for this board.
 		return (pieceScore * this.#kPieceWeight) + (moveScore * this.#kMoveWeight) + (positionalScore * this.#kPositionalWeight);
 	}
 }
