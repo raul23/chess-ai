@@ -14,7 +14,7 @@ const playerControl = createEnum(['Human', 'Ai']);
 
 // Implementing an Enum in JavaScript @ https://www.codecademy.com/resources/docs/javascript/enums
 // TODO: which to use `createEnum` or this one?
-const moveType = Object.freeze({ 
+const moveType = Object.freeze({
   SelectAPiece: 0,
   SelectAPosition: 1,
   PawnPromotion: 'PawnPromotion' // NOTEB: no number associated
@@ -23,7 +23,7 @@ const moveType = Object.freeze({
 const pieceType = createEnum(['Pawn', 'Knight', 'Bishop', 'Rook', 'Queen', 'King', 'None']);
 const pieceColor = createEnum(['White', 'Black', 'None']);
 
-const gameState = Object.freeze({ 
+const gameState = Object.freeze({
   Normal: 0,
   Check: 2, // NOTEB: no number 1 used
   Checkmate: 3,
@@ -33,14 +33,14 @@ const gameState = Object.freeze({
 const turnState = createEnum(['Pre', 'Play', 'Post']);
 
 class PieceDetails {
-  
+
   constructor(pt=pieceType.None, pc=pieceColor.None, bCanEnPassant=false, bHasMoved=false) {
     this.pieceType = pt;
 		this.pieceColor = pc;
 		this.bCanEnPassant = bCanEnPassant;
 		this.bHasMoved = bHasMoved;
   }
-  
+
   clear() {
     this.pieceType = pieceType.None;
 		this.pieceColor = pieceColor.None;
@@ -50,7 +50,7 @@ class PieceDetails {
 }
 
 class GridPosition {
-  
+
   constructor(r=null, c=null) {
     this.row = r;
 		this.column = c;
@@ -58,7 +58,7 @@ class GridPosition {
 }
 
 class Move {
-  
+
   constructor(fromRow, fromCol, toRow, toCol, specialMove=null) {
     this.fromRow = fromRow;
 		this.fromCol = fromCol;
@@ -69,13 +69,13 @@ class Move {
   }
 }
 
-const chessMove = Object.freeze({ 
+const chessMove = Object.freeze({
   theMove: null,
   startPosition: null,
   endPosition: null
 });
 
-const openings = createEnum(['RuyLopez', 'SicilianDefence', 'QueensGambit', 
+const openings = createEnum(['RuyLopez', 'SicilianDefence', 'QueensGambit',
                             'AlekhineDefence', 'ModernDefence', 'KingsIndian',
                             'EnglishOpening', 'DutchDefence', 'StonewallAttack']);
 
@@ -86,7 +86,7 @@ const Game = {
   windowWidth: 400,
 	windowExtraY: 40,
   boardDimensions: 8,
-  
+
   assetsAtlas: {
 		WhiteKing: 0,
 		WhiteQueen: 1,
@@ -105,7 +105,7 @@ const Game = {
 	},
   assetsKey: 'assets',
 	assetsFilePath : 'https://raw.githubusercontent.com/Jexan/ChessJs/master/imgs/assets.png',
-  
+
   turn: pieceColor.White, // White starts first
   turnTextStyle: {
 		font: '18pt Segoe UI',
@@ -141,20 +141,20 @@ var preload = function(){
 var create = function(){
   Game.chessBoard = new ChessBoard();
   Game.chessBoard.start();
-  
+
   Game.chessPlayer = new ChessPlayer(Game.pieceColor.White, Game.chessBoard);
-  
+
   Game.chessPlayerAI = new ChessPlayerAI(Game.pieceColor.Black, Game.chessBoard, false);
   Game.chessPlayerAI.opponentPlayer = Game.chessPlayer;
   Game.chessPlayer.opponentPlayer = Game.chessPlayerAI;
   Game.chessPlayerAI.start();
-  
+
   this.possibleSquares = this.add.group();
-  
+
   this.turnText = this.add.text(
-    Game.turnTextX, 
-    Game.turnTextY, 
-    'TURN:', 
+    Game.turnTextX,
+    Game.turnTextY,
+    'TURN:',
     Game.turnTextStyle
   );
 
@@ -190,44 +190,44 @@ Game.chess = new Phaser.Game(config);
 /*      ChessBoard.js     */
 /**************************/
 class ChessBoard {
-  
+
   // Chess board is always 8x8
   boardDimensions = Game.boardDimensions; // static
   squareLength = Game.squareLength;
   halfSquareLength = Game.squareLength/2;
-  
+
   // This is the actual data - internal for our use.
   boardLayout; // PieceDetails
-  
+
   // This is an array of references to the pieces so we can visually move them when required.
   boardVisuals; // ChessPiece
-  
+
   // NOTEB: in our case, no move highlights. We handle them differently.
-  
+
   start() {
     this.createBoard();
   }
-  
+
   createBoard() {
     // Chess board is always 8x8
     // NOTE: How to create an empty two dimensional array (one-line) @ https://stackoverflow.com/a/49201210
     this.boardLayout = Array.from(Array(this.boardDimensions), () => new Array(this.boardDimensions)); // PieceDetails
     this.boardVisuals = Array.from(Array(this.boardDimensions), () => new Array(this.boardDimensions)); // ChessPiece
-    
+
     // Set all cells to be null.
     for (let iRow = 0; iRow < this.boardDimensions; iRow++) {
       for (let iCol = 0; iCol < this.boardDimensions; iCol++) {
         let startPositionX = (iCol * this.squareLength) + this.halfSquareLength;
         let startPositionY = (iRow * this.squareLength) + this.halfSquareLength;
-        
+
         if (iRow % 2 == 0 && iCol % 2 > 0 || iRow % 2 > 0 && iCol % 2 == 0) {
           let imageSquare = Game.scene.add.sprite(startPositionX, startPositionY, Game.assetsKey, Game.assetsAtlas.BlackSquare);
           imageSquare.scaleX = this.squareLength / imageSquare.width;
           imageSquare.scaleY = this.squareLength / imageSquare.height;
         }
-        
+
         let pieceDetails = this.getStartingPieceAt(iRow, iCol);
-        
+
         // If there is a piece here, let's spawn that piece and position appropriately.
         if (pieceDetails.pieceType != Game.pieceType.None) {
           let chessPiece = new ChessPiece();
@@ -236,45 +236,45 @@ class ChessBoard {
         } else {
           this.boardVisuals[iRow][iCol] = null;
         }
-        
+
         // Internal board data.
         this.boardLayout[iRow][iCol] = pieceDetails;
       }
     }
   }
-  
+
   copyInternalBoard(boardToCopy) {
     // Chess board is always 8x8
     this.boardLayout = [];
-    
+
     // Set all cells to be null.
     boardToCopy.boardLayout.forEach((row, y) => {
       this.boardLayout.push([]);
       row.forEach((pieceDetails, x) => {
-        this.boardLayout[y].push(copyPieceDetails(pieceDetails)); 
+        this.boardLayout[y].push(copyPieceDetails(pieceDetails));
       });
     });
   }
-  
+
   swapPieceType(iRow, iCol, toType) {
     if (iRow >= 0 && iRow < this.boardDimensions && iCol >= 0 && iCol < this.boardDimensions) {
       this.boardLayout[iRow][iCol].pieceType = toType;
-      
+
       if (this.boardVisuals) {
         // TODO: do the positions calculations right in `setPieceImage()`
         let imagePositionX = (iCol * this.squareLength) + this.halfSquareLength;
         let imagePositionY = (iRow * this.squareLength) + this.halfSquareLength;
         this.boardVisuals[iRow][iCol].destroyPieceImage();
-        this.boardVisuals[iRow][iCol].setDetails(copyPieceDetails(this.boardLayout[iRow][iCol]), 
+        this.boardVisuals[iRow][iCol].setDetails(copyPieceDetails(this.boardLayout[iRow][iCol]),
                                                  imagePositionX, imagePositionY);
       }
     }
   }
-  
+
   killPiece(iRow, iCol) {
     if (iRow >= 0 && iRow < this.boardDimensions && iCol >= 0 && iCol < this.boardDimensions) {
       this.boardLayout[iRow][iCol].clear();
-      
+
       if (this.boardVisuals) {
         if (this.boardVisuals[iRow][iCol] !== null) {
           // TODO: delete `ChessPiece`? or just set it to `null`?
@@ -284,7 +284,7 @@ class ChessBoard {
       }
     }
   }
-  
+
   movePiece(fromRow, fromCol, toRow, toCol) {
     if (fromRow >= 0 && fromRow < this.boardDimensions && fromCol >= 0 && fromCol < this.boardDimensions &&
             toRow >= 0 && toRow < this.boardDimensions && toCol >= 0 && toCol < this.boardDimensions) {
@@ -298,14 +298,14 @@ class ChessBoard {
         this.boardVisuals[toRow][toCol].setPieceImage(imagePositionX, imagePositionY);
         this.boardVisuals[fromRow][fromCol] = null;
       }
-      
+
       // IMPORTANT: work first with `boardVisuals` because of the reference issue in javascript
       this.boardLayout[fromRow][fromCol].bHasMoved = true;
       this.boardLayout[toRow][toCol] = copyPieceDetails(this.boardLayout[fromRow][fromCol]);
       this.boardLayout[fromRow][fromCol].clear();
     }
   }
-  
+
   getStartingPieceAt(row, column) {
     // Default settings
     let piece = new PieceDetails();
@@ -313,7 +313,7 @@ class ChessBoard {
     piece.pieceColor = Game.pieceColor.None;
     piece.bCanEnPassant = false;
     piece.bHasMoved = false;
-    
+
     // Set type and color:
     if (row == 0) {
       piece.pieceColor = Game.pieceColor.White;
@@ -379,10 +379,10 @@ class ChessBoard {
           break;
       }
     }
-    
+
     return piece;
   }
-  
+
   selectCell(pointer) {
     let selectedGridPosition = new GridPosition();
     selectedGridPosition.row = Math.floor(pointer.y/this.squareLength);
@@ -393,22 +393,22 @@ class ChessBoard {
     }
     return new GridPosition();;
   }
-  
+
   hideHighlight() {
     // Erases highlighted squares
-    Game.scene.possibleSquares.clear(true); 
+    Game.scene.possibleSquares.clear(true);
   }
-  
+
   // TODO: doesn't do anything!
   clearMoveOptions() {
-    
+
   }
-  
+
   highlightMoveOptions(moveOptions) {
     _.each(moveOptions, (move) => {
       let image =  Game.scene.add.sprite(
-        move.column * this.squareLength + this.halfSquareLength, 
-        move.row * this.squareLength + this.halfSquareLength, 
+        move.column * this.squareLength + this.halfSquareLength,
+        move.row * this.squareLength + this.halfSquareLength,
         Game.assetsKey,
         Game.assetsAtlas.PossibleSquare
       );
@@ -430,7 +430,7 @@ function handleSelectedSquare(pointer) {
   //console.log('Image clicked! ' + pointer.x + ' ' + pointer.y);
   // `this` is a `ChessPiece`
   if (Game.chessPlayer) {
-    Game.chessPlayer.update(pointer); 
+    Game.chessPlayer.update(pointer);
   }
 }
 
@@ -440,7 +440,7 @@ function copyChessPiece(chessPieceToCopy) {
 }
 
 function copyPieceDetails(pieceDetailsToCopy) {
-  let newPieceDetails = new PieceDetails(pieceDetailsToCopy.pieceType, pieceDetailsToCopy.pieceColor, 
+  let newPieceDetails = new PieceDetails(pieceDetailsToCopy.pieceType, pieceDetailsToCopy.pieceColor,
                                          pieceDetailsToCopy.bCanEnPassant, pieceDetailsToCopy.bHasMoved)
   return newPieceDetails;
 }
@@ -451,23 +451,23 @@ function copyPieceDetails(pieceDetailsToCopy) {
 class ChessPiece {
   // NOTEB: private
   pieceImage = null;
-  
+
   pieceDetails;
-  
+
   constructor(pieceImage, pieceDetails) {
     this.pieceImage = pieceImage;
     this.pieceDetails = pieceDetails;
   }
-  
+
   setDetails(details, imagePositionX, imagePositionY) {
     this.pieceDetails = details;
     this.setPieceImage(imagePositionX, imagePositionY);
   }
-  
+
   destroyPieceImage() {
     this.pieceImage.destroy();
   }
-  
+
   setPieceImage(imagePositionX, imagePositionY) {
     let pieceName = this.pieceDetails.pieceColor + this.pieceDetails.pieceType;
 
@@ -478,7 +478,7 @@ class ChessPiece {
 
     this.pieceImage.setInteractive();
     if (this.pieceDetails.pieceColor == Game.pieceColor.White) {
-      this.pieceImage.on('pointerdown', handlePossibleMoves, this); 
+      this.pieceImage.on('pointerdown', handlePossibleMoves, this);
     }
   }
 }
@@ -488,7 +488,7 @@ function handlePossibleMoves (pointer) {
   // `this` is a `ChessPiece`
   if (Game.chessPlayer) {
     console.log(this.pieceDetails.pieceType);
-    Game.chessPlayer.update(pointer); 
+    Game.chessPlayer.update(pointer);
   }
 }
 
@@ -500,7 +500,7 @@ class ChessOpenings {
   selectedOpening = null;
   // Counter to know how many moves have been played so far for the selected chess opening
   currentMove = 0;
-  
+
   moves_RuyLopez = [];
   moves_SicilianDefence = [];
 	moves_QueensGambit = [];
@@ -510,17 +510,17 @@ class ChessOpenings {
 	moves_EnglishOpening = [];
 	moves_DutchDefence = [];
 	moves_StonewallAttack = [];
-  
+
   constructor(color) {
     this.color = color
     this.start();
   }
-  
+
   start() {
     this.setUpOpenings();
     this.restartGame();
   }
-  
+
   // TODOB: moves should be a struct
   setUpOpenings() {
     // Classic Openings - Or variations of:
@@ -600,18 +600,18 @@ class ChessOpenings {
 			this.moves_StonewallAttack.push(new Move(7, 6, 5, 5));
     }
   }
-  
+
   restartGame() {
     this.currentMove = 0;
     this.setARandomOpening();
   }
-  
+
   setARandomOpening() {
     this.selectedOpening = randomPropertyValue(Game.openings);
     //this.selectedOpening = Game.openings.ModernDefence;
     this.debugOutput();
   }
-  
+
   // Retuns true if there are still moves to be played for the selected chess opening
   // Returns false otherwise or the selected opening is not supported (which should not normally happen)
   isAnotherMoveAvailable() {
@@ -646,16 +646,16 @@ class ChessOpenings {
       default:
         return false;
     }
-    
+
     // Out of moves.
 		return false;
   }
-  
+
   // Can return `null` if no more moves available
   getNextMove() {
     // TODO: should be a kind of struct
     let nextMove = null;
-    
+
     switch (this.selectedOpening) {
       case Game.openings.RuyLopez:
         if (this.currentMove < this.moves_RuyLopez.length) {
@@ -705,20 +705,20 @@ class ChessOpenings {
       default:
         break;
     }
-    
+
     // Increment to next move.
 		this.currentMove++;
-    
+
     // Out of moves if `nextMove` is `null`.
-		return nextMove; 
+		return nextMove;
   }
-  
+
   debugOutput() {
     let col = 'White';
     if (this.color == 'Black') {
       col = 'Black';
     }
-    
+
     switch (this.selectedOpening) {
       case Game.openings.RuyLopez:
         console.log('Color: ' + col + ', Opening: RuyLopez');
@@ -769,35 +769,35 @@ class ChessPlayer {
 
   // TODO: set following as private
   chessBoard = null;
-  // TODO: set 
+  // TODO: set
   opponentPlayer = null;
-  
+
   bMyTurn = true;
   color = Game.pieceColor.White;
-  
+
   // TODO: protected with #?
   #iNumberOfLivingPieces = this.kTotalNumberOfStartingPieces;
   #bInCheck = false;
-  
-  // TODO: protected with #? 
+
+  // TODO: protected with #?
   eCurrentMoveType = Game.moveType.SelectAPiece;
   moveOptions = []; // GridPosition
-  
+
   selectedPiecePosition = new GridPosition();	// `GridPosition`; Position to move piece to.
-  
+
   moves = [];
   minimaxMoves = [];
-  
+
   constructor(color, chessBoard, bMyTurn=true) {
     this.color = color;
     this.chessBoard = chessBoard;
     this.bMyTurn = bMyTurn;
   }
-  
-  setTurn(bturn) { 
-    this.bMyTurn = bturn; 
+
+  setTurn(bturn) {
+    this.bMyTurn = bturn;
   }
-  
+
   update(pointer) {
     // NOTEB: they check `chessBoard != null && chessBoard.boardLayout != null`
     if (this.bMyTurn) {
@@ -812,9 +812,9 @@ class ChessPlayer {
         // We have an end to the game, so let the game over canvas show the player.
         console.log('GAME OVER');
       }
-    } 
+    }
   }
-  
+
   finishTurn() {
     if (this.eCurrentMoveType == Game.moveType.PawnPromotion && this.bMyTurn) {
       if (this.makeAMove(this.selectedPiecePosition)) {
@@ -822,7 +822,7 @@ class ChessPlayer {
       }
     }
   }
-  
+
   postMove() {
     this.bMyTurn = false;
     this.opponentPlayer.setTurn(true);
@@ -831,30 +831,30 @@ class ChessPlayer {
     //this.showCheckWarning();
     this.setTurnIndicator();
   }
-  
+
   showCheckWarning() {
-    
+
   }
-  
+
   setTurnIndicator() {
     if(this.bMyTurn) {
       Game.turn = this.color;
     }
     else {
-      Game.turn = this.opponentPlayer.color;	
+      Game.turn = this.opponentPlayer.color;
     }
 
     Game.scene.turnColorText.text = Game.turn;
   }
-  
+
   // Returns gameState = Checkmate|Check|Normal|
   preTurn() {
     // Check whether this player is in CHECK, CHECKMATE or STALEMATE.
     this.#bInCheck = this.checkForCheck(this.chessBoard, this.color);
-   
+
     // Remove any highlight position as we have yet to select a piece.
 		this.chessBoard.hideHighlight();
-    
+
     // If we are in CHECK, can we actually make a move to get us out of it?
     if (this.#bInCheck) {
       if (this.checkForCheckmate(this.chessBoard, this.color)){
@@ -869,11 +869,11 @@ class ChessPlayer {
 				return Game.gameState.Normal;
       }
     }
-    
+
     // Return normal if none of the above conditions have been met.
 		return Game.gameState.Normal;
   }
-  
+
   makeAMove(gridPosition) {
     // Ensure the position passed in is within the board dimensions.
     if (gridPosition.row <= this.chessBoard.boardDimensions && gridPosition.column <= this.chessBoard.boardDimensions){
@@ -884,27 +884,27 @@ class ChessPlayer {
           this.selectedPiecePosition.row = gridPosition.row;
           this.selectedPiecePosition.column = gridPosition.column;
           let boardPiece = this.chessBoard.boardLayout[gridPosition.row][gridPosition.column];
-          
+
           // Clear all highlighted move options before repopulating in `getMoveOptions()` function.
 					this.moveOptions = [];
-          
+
           let moves = [];
-          moves = this.getMoveOptions(this.selectedPiecePosition, boardPiece, this.chessBoard); 
-          
+          moves = this.getMoveOptions(this.selectedPiecePosition, boardPiece, this.chessBoard);
+
           // Is this a valid move?
           for (let currentMove = 0; currentMove < moves.length; currentMove++) {
             let boardToTest = new ChessBoard();
             boardToTest.copyInternalBoard(this.chessBoard);
             boardToTest.movePiece(moves[currentMove].fromRow, moves[currentMove].fromCol,
                                   moves[currentMove].toRow, moves[currentMove].toCol);
-            
+
             if (!this.checkForCheck(boardToTest, this.color)) {
 							this.moveOptions.push(new GridPosition(moves[currentMove].toRow, moves[currentMove].toCol));
 						}
           }
-          
+
           this.chessBoard.highlightMoveOptions(this.moveOptions);
-          
+
           // Change move type.
 					this.eCurrentMoveType = Game.moveType.SelectAPosition;
         } else {
@@ -922,7 +922,7 @@ class ChessPlayer {
 					this.makeAMove(gridPosition);
         } else {
           let validPosition = false;
-          
+
           // Check if this is a position within the highlighted options.
 					for (let i = 0; i < this.moveOptions.length; i++) {
             let highlightPos = this.moveOptions[i];
@@ -931,7 +931,7 @@ class ChessPlayer {
 							break;
 						}
           }
-          
+
           // If we selected a valid position from the highlighted options, then move the piece.
 					if (validPosition == true) {
             // If this was an en'passant move the taken piece will not be in the square we moved to.
@@ -942,19 +942,19 @@ class ChessPlayer {
                 this.chessBoard.boardLayout[this.selectedPiecePosition.row][this.selectedPiecePosition.column].bCanEnPassant = true;
               }
             }
-            
+
             // En'Passant removal of enemy pawn.
 						// If our pawn moved into an empty position to the left or right, then must be En'Passant.
 						if (this.chessBoard.boardLayout[this.selectedPiecePosition.row][this.selectedPiecePosition.column].pieceType == Game.pieceType.Pawn &&
                 this.chessBoard.boardLayout[gridPosition.row][gridPosition.column].pieceType == Game.pieceType.None) {
               let pawnDirectionOpposite = this.color == Game.pieceColor.White ? -1 : 1;
-              
+
               // If we end up on a different column, but there was no piece in the target cell - Must be En'Passant.
 							if (gridPosition.column != this.selectedPiecePosition.column) {
 								this.chessBoard.killPiece(gridPosition.row + pawnDirectionOpposite, gridPosition.column);
 							}
             }
-            
+
             // CASTLING - Move the rook.
             if (this.chessBoard.boardLayout[this.selectedPiecePosition.row, this.selectedPiecePosition.column].pieceType == Game.pieceType.King) {
               // Are we moving 2 spaces??? This indicates CASTLING.
@@ -966,18 +966,18 @@ class ChessPlayer {
 								this.chessBoard.movePiece(this.selectedPiecePosition.row, this.selectedPiecePosition.column - 3, this.selectedPiecePosition.row, this.selectedPiecePosition.column - 1);
               }
             }
-            
+
             // Kill any piece in this new position.
             this.chessBoard.killPiece(gridPosition.row, gridPosition.column);
-            
+
             // Move the piece into new position.
 						this.chessBoard.movePiece(this.selectedPiecePosition.row, this.selectedPiecePosition.column, gridPosition.row, gridPosition.column);
-            
+
             // Save new selected piece position
             // NOTEB: not done
             this.selectedPiecePosition.row = gridPosition.row;
             this.selectedPiecePosition.column = gridPosition.column;
-            
+
             // Check if we need to promote a pawn.
 						if (this.chessBoard.boardLayout[gridPosition.row][gridPosition.column].pieceType == Game.pieceType.Pawn &&
 							(gridPosition.row == 0 || gridPosition.row == 7)) {
@@ -986,7 +986,7 @@ class ChessPlayer {
 						} else {
               // NOTEB: didn't do it
               this.eCurrentMoveType = Game.moveType.SelectAPiece;
-              
+
 							// Clear highlights.
 							this.chessBoard.clearMoveOptions();
 
@@ -1003,13 +1003,13 @@ class ChessPlayer {
 						this.chessBoard.clearMoveOptions();
 
 						// Clear move options.
-						this.moveOptions = [];  
+						this.moveOptions = [];
           }
         }
       } else if (this.eCurrentMoveType == Game.moveType.PawnPromotion) {
         // NOTEB: didn't do it
         this.eCurrentMoveType = Game.moveType.SelectAPiece;
-        
+
         // Change the PAWN into the selected piece - Queen for this example
 				this.chessBoard.swapPieceType(this.selectedPiecePosition.row, this.selectedPiecePosition.column, Game.pieceType.Queen);
 
@@ -1017,14 +1017,14 @@ class ChessPlayer {
 				return true;
       }
     }
-    
+
     // Not finished turn yet.
 		return false;
   }
-  
+
   getNumberOfLivingPieces() {
     this.iNumberOfLivingPieces = 0;
-    
+
     for (let iRow = 0; iRow < this.chessBoard.boardDimensions; iRow++) {
 			for (let iCol = 0; iCol < this.chessBoard.boardDimensions; iCol++) {
 				// Check for pieces.
@@ -1036,12 +1036,12 @@ class ChessPlayer {
 		}
     return this.iNumberOfLivingPieces;
   }
-  
+
   // NOTEB: `moves` passed by reference
   getAllMoveOptions(boardToTest, teamColor) {
     let moves = [];
     let numberOfPiecesFound = 0;
-    
+
     // Go through the board and get the moves for all pieces of our color.
     for (let iRow = 0; iRow < this.chessBoard.boardDimensions; iRow++) {
 			for (let iCol = 0; iCol < this.chessBoard.boardDimensions; iCol++) {
@@ -1049,7 +1049,7 @@ class ChessPlayer {
         let currentPiece = boardToTest.boardLayout[iRow][iCol];
         if (currentPiece.pieceColor == teamColor && currentPiece.pieceType != Game.pieceType.None) {
           numberOfPiecesFound++;
-          
+
           switch (currentPiece.pieceType) {
 						case Game.pieceType.Pawn:
 							moves.push(...this.getPawnMoveOptions(new GridPosition(iRow, iCol), currentPiece, boardToTest));
@@ -1082,7 +1082,7 @@ class ChessPlayer {
 						default:
 							break;
 					}
-          
+
           // Early exit - No point searching when we have already found all our pieces.
 					if (numberOfPiecesFound == this.iNumberOfLivingPieces) {
 						return moves;
@@ -1090,14 +1090,14 @@ class ChessPlayer {
         }
       }
     }
-    
+
     return moves;
   }
-  
+
   // NOTEB: `moves` passed by reference
   getMoveOptions(gridPosition, boardPiece, boardToTest) {
     let moves;
-    
+
     // All pieces move differently.
 		switch (boardPiece.pieceType) {
 			case Game.pieceType.Pawn:
@@ -1131,23 +1131,23 @@ class ChessPlayer {
 			default:
 				break;
 		}
-    
+
     return moves;
   }
-  
+
   // NOTEB: `moves` passed by reference
   checkMoveOptionValidityAndReturnMove(moveToCheck, pieceColor, boardToTest) {
     let moves = [];
     let tempBoard = new ChessBoard();
     tempBoard.copyInternalBoard(boardToTest);
-    if (moveToCheck.toCol >= 0 && moveToCheck.toCol < this.chessBoard.boardDimensions 
+    if (moveToCheck.toCol >= 0 && moveToCheck.toCol < this.chessBoard.boardDimensions
         && moveToCheck.toRow >= 0 && moveToCheck.toRow < this.chessBoard.boardDimensions) {
 			// We check with color passed in to enable the same functions to construct attacked spaces
 			// as well as constructing the positions we can move to.
       if (tempBoard.boardLayout[moveToCheck.toRow][moveToCheck.toCol].pieceType == Game.pieceType.None) {
         // Will this leave us in check?
 				tempBoard.movePiece(moveToCheck.fromRow, moveToCheck.fromCol, moveToCheck.toRow, moveToCheck.toCol);
-        
+
         if (!this.checkForCheck(tempBoard, pieceColor)){
 					moves.push(moveToCheck);
 				}
@@ -1161,44 +1161,44 @@ class ChessPlayer {
 						moves.push(moveToCheck);
 					}
         }
-        
+
         // Hit a piece, so no more moves in this direction.
 				return [false, moves];
       }
-      
+
       return [true, moves];
 		}
 
 		return [false, moves];
   }
-  
+
   // NOTEB: `moves` passed by reference
   getPawnMoveOptions(gridPosition, boardPiece, boardToTest) {
     let moves = [];
     let tempBoard = new ChessBoard();
     tempBoard.copyInternalBoard(boardToTest);
     let pawnDirection = boardPiece.pieceColor == Game.pieceColor.White ? 1 : -1;
-    
+
     // Single step FORWARD.
     let col = gridPosition.column;
 		let row = gridPosition.row + pawnDirection;
 		if (row >= 0 && row < this.chessBoard.boardDimensions && tempBoard.boardLayout[row][col].pieceType == Game.pieceType.None) {
       // Will this leave us in check? Only interested in check if its one of our moves.
       tempBoard.movePiece(gridPosition.row, gridPosition.column, row, col);
-      
+
       if (!this.checkForCheck(tempBoard, boardPiece.pieceColor)) {
 				moves.push(new Move(gridPosition.row, gridPosition.column, row, col));
 			}
     }
-    
+
     // Double step FORWARD.
     if (gridPosition.row == 1 || gridPosition.row == 6) {
       // Reset the board.
       tempBoard.copyInternalBoard(boardToTest);
-      
+
       let row2 = gridPosition.row + pawnDirection * 2;
-			if (row2 >= 0 && row2 < this.chessBoard.boardDimensions && 
-          tempBoard.boardLayout[row2][col].pieceType == Game.pieceType.None && 
+			if (row2 >= 0 && row2 < this.chessBoard.boardDimensions &&
+          tempBoard.boardLayout[row2][col].pieceType == Game.pieceType.None &&
           tempBoard.boardLayout[row2][col].pieceType == Game.pieceType.None) {
 				// Will this leave us in check? Only interested in check if its one of our moves.
 				tempBoard.movePiece(gridPosition.row, gridPosition.column, row2, col);
@@ -1208,13 +1208,13 @@ class ChessPlayer {
 				}
 			}
     }
-    
+
     // En'Passant move.
     if ((gridPosition.row == 4 && boardPiece.pieceColor == Game.pieceColor.White) ||
 			(gridPosition.row == 3 && boardPiece.pieceColor == Game.pieceColor.Black)) {
       // Reset the board.
       tempBoard.copyInternalBoard(boardToTest);
-      
+
       // Pawn beside us, can we en'passant.
       // IMPORTANT: if I don't do `let`, "ReferenceError: Cannot access 'col' before initialization"
 			let col = gridPosition.column - 1;
@@ -1231,10 +1231,10 @@ class ChessPlayer {
 					}
         }
       }
-      
+
       // Reset the board.
       tempBoard.copyInternalBoard(boardToTest);
-      
+
       col = gridPosition.column + 1;
       if (col < this.chessBoard.boardDimensions) {
         let rightPiece = tempBoard.boardLayout[row][col];
@@ -1249,17 +1249,17 @@ class ChessPlayer {
         }
       }
     }
-    
+
     // Take a piece move.
     if (gridPosition.row > 0 && gridPosition.row < this.chessBoard.boardDimensions - 1) {
       // Ahead of selected pawn to the LEFT.
 			if (gridPosition.column > 0) {
         // Reset the board.
         tempBoard.copyInternalBoard(boardToTest);
-        
+
         let col = gridPosition.column - 1;
 				let row = gridPosition.row + pawnDirection;
-        
+
         let aheadLeftPiece = tempBoard.boardLayout[row][col];
         if (aheadLeftPiece.pieceType != Game.pieceType.None && aheadLeftPiece.pieceColor != boardPiece.pieceColor) {
           // Will this leave us in check? Only interested in check if its one of our moves.
@@ -1270,12 +1270,12 @@ class ChessPlayer {
 					}
         }
       }
-      
+
       // Ahead of selected pawn to the RIGHT.
 			if (gridPosition.column < this.chessBoard.boardDimensions - 1) {
         // Reset the board.
         tempBoard.copyInternalBoard(boardToTest);
-        
+
         let col = gridPosition.column + 1;
 				let row = gridPosition.row + pawnDirection;
         if (col >= 0 && col < this.chessBoard.boardDimensions && row >= 0 && row < this.chessBoard.boardDimensions) {
@@ -1291,14 +1291,14 @@ class ChessPlayer {
         }
       }
     }
-    
+
     return moves;
   }
-  
+
   // NOTEB: `moves` passed by reference
   getHorizontalAndVerticalMoveOptions(gridPosition, boardPiece, boardToTest) {
     let results, move, moves = [];
-    
+
     //Vertical DOWN the board.
 		for (let row = gridPosition.row + 1; row < this.chessBoard.boardDimensions; row++) {
 			// Keep checking moves until one is invalid.
@@ -1342,14 +1342,14 @@ class ChessPlayer {
 				break;
 			}
 		}
-    
+
     return moves;
   }
-  
+
   // NOTEB: `moves` passed by reference
   getDiagonalMoveOptions(gridPosition, boardPiece, boardToTest) {
     let results, move, moves = [];
-    
+
     // ABOVE & LEFT
 		for (let row = gridPosition.row - 1, col = gridPosition.column - 1; row >= 0 && col >= 0; row--, col--) {
 			// Keep checking moves until one is invalid.
@@ -1362,7 +1362,7 @@ class ChessPlayer {
 		}
 
 		// ABOVE & RIGHT
-		for (let row = gridPosition.row - 1, col = gridPosition.column + 1; row >= 0 && col < this.chessBoard.boardDimensions; 
+		for (let row = gridPosition.row - 1, col = gridPosition.column + 1; row >= 0 && col < this.chessBoard.boardDimensions;
          row--, col++) {
 			// Keep checking moves until one is invalid.
 			move = new Move(gridPosition.row, gridPosition.column, row, col);
@@ -1374,7 +1374,7 @@ class ChessPlayer {
 		}
 
 		// BELOW & LEFT
-		for (let row = gridPosition.row + 1, col = gridPosition.column - 1; row < this.chessBoard.boardDimensions && col >= 0; 
+		for (let row = gridPosition.row + 1, col = gridPosition.column - 1; row < this.chessBoard.boardDimensions && col >= 0;
          row++, col--) {
 			// Keep checking moves until one is invalid.
 			move = new Move(gridPosition.row, gridPosition.column, row, col);
@@ -1386,7 +1386,7 @@ class ChessPlayer {
 		}
 
 		// BELOW & RIGHT
-		for (let row = gridPosition.row + 1, col = gridPosition.column + 1; 
+		for (let row = gridPosition.row + 1, col = gridPosition.column + 1;
          row < this.chessBoard.boardDimensions && col < this.chessBoard.boardDimensions; row++, col++) {
 			// Keep checking moves until one is invalid.
 			move = new Move(gridPosition.row, gridPosition.column, row, col);
@@ -1396,20 +1396,20 @@ class ChessPlayer {
 				break;
 			}
 		}
-    
+
     return moves;
   }
-  
+
   // NOTEB: `moves` passed by reference
   getKnightMoveOptions(gridPosition, boardPiece, boardToTest) {
     let results, move, moves = [];
-    
+
     // Moves to the RIGHT.
     move = new Move(gridPosition.row, gridPosition.column, gridPosition.row+1, gridPosition.column+2);
     results = this.checkMoveOptionValidityAndReturnMove(move, boardPiece.pieceColor, boardToTest);
     moves.push(...results[1]);
-    
-    // IMPORTANT: create same kind of object everytime because if I don't and the reference is changed, then 
+
+    // IMPORTANT: create same kind of object everytime because if I don't and the reference is changed, then
     // the change gets propagated henceforth
     move = new Move(gridPosition.row, gridPosition.column, gridPosition.row - 1, gridPosition.column+2);
 		results = this.checkMoveOptionValidityAndReturnMove(move, boardPiece.pieceColor, boardToTest);
@@ -1441,14 +1441,14 @@ class ChessPlayer {
     move = new Move(gridPosition.row, gridPosition.column, gridPosition.row + 2, gridPosition.column - 1);
 		results = this.checkMoveOptionValidityAndReturnMove(move, boardPiece.pieceColor, boardToTest);
     moves.push(...results[1]);
-    
+
     return moves;
   }
-  
+
   // NOTEB: `moves` passed by reference
   getKingMoveOptions(gridPosition, boardPiece, boardToTest) {
     let results, move, moves = [];
-    
+
     // Start at position top left of king and move across and down.
     for (let row = gridPosition.row - 1; row <= gridPosition.row + 1; row++) {
 			for (let col = gridPosition.column - 1; col <= gridPosition.column + 1; col++) {
@@ -1461,14 +1461,14 @@ class ChessPlayer {
 				}
 			}
 		}
-    
+
     if (boardPiece.pieceColor == this.color) {
       let opponentColor = this.color == Game.pieceColor.White ? Game.pieceColor.Black : Game.pieceColor.White;
-      
+
       // Compile all the moves available to our opponent.
       let allOpponentMoves;
       allOpponentMoves = this.getAllMoveOptions(boardToTest, opponentColor);
-      
+
       // Can CASTLE if not in CHECK.
       if (!this.#bInCheck) {
         // CASTLE to the right.
@@ -1476,7 +1476,7 @@ class ChessPlayer {
         if (!king.bHasMoved) {
           if (gridPosition.column + 4 < this.chessBoard.boardDimensions) {
             let rightRook = boardToTest.boardLayout[gridPosition.row][gridPosition.column + 4];
-            
+
             if (rightRook.pieceType == Game.pieceType.Rook && !rightRook.bHasMoved) {
               if (boardToTest.boardLayout[gridPosition.row][gridPosition.column + 1].pieceType == Game.pieceType.None &&
 								boardToTest.boardLayout[gridPosition.row][gridPosition.column + 2].pieceType == Game.pieceType.None &&
@@ -1484,28 +1484,28 @@ class ChessPlayer {
                 // Cannot CASTLE through a CHECK position.
 							  let canCastle = true;
                 for (let i = 0; i < allOpponentMoves.length; i++) {
-                  if ((allOpponentMoves[i].toCol == gridPosition.column + 2 && 
+                  if ((allOpponentMoves[i].toCol == gridPosition.column + 2 &&
                        allOpponentMoves[i].toRow == gridPosition.row) ||
-										(allOpponentMoves[i].toCol == gridPosition.column + 1 && 
+										(allOpponentMoves[i].toCol == gridPosition.column + 1 &&
                      allOpponentMoves[i].toRow == gridPosition.row)) {
                     canCastle = false;
                   }
                 }
-                
+
                 // Check if the final position is valid.
                 if (canCastle){
                   results = this.checkMoveOptionValidityAndReturnMove(
-                    new Move(gridPosition.row, gridPosition.column, gridPosition.row, gridPosition.column + 2), 
+                    new Move(gridPosition.row, gridPosition.column, gridPosition.row, gridPosition.column + 2),
                     boardPiece.pieceColor, boardToTest);
                   moves.push(...results[1]);
                 }
               }
             }
           }
-          
+
           // CASTLE to the left.
           let leftRook = boardToTest.boardLayout[gridPosition.row][gridPosition.column - 3];
-          
+
           if (leftRook.pieceType == Game.pieceType.Rook && !leftRook.bHasMoved) {
             if (gridPosition.column - 3 >= 0) {
               if (boardToTest.boardLayout[gridPosition.row][gridPosition.column - 1].pieceType == Game.pieceType.None &&
@@ -1513,20 +1513,20 @@ class ChessPlayer {
                 // Cannot CASTLE through a CHECK position.
                 let canCastle = true;
                 for (let i = 0; i < allOpponentMoves.Count; i++){
-                  if ((allOpponentMoves[i].toCol == gridPosition.column - 1 && 
+                  if ((allOpponentMoves[i].toCol == gridPosition.column - 1 &&
                        allOpponentMoves[i].toRow == gridPosition.row) ||
-										(allOpponentMoves[i].toCol == gridPosition.column - 2 && 
+										(allOpponentMoves[i].toCol == gridPosition.column - 2 &&
                      allOpponentMoves[i].toRow == gridPosition.row) ||
-										(allOpponentMoves[i].toCol == gridPosition.column - 3 
+										(allOpponentMoves[i].toCol == gridPosition.column - 3
                      && allOpponentMoves[i].toRow == gridPosition.row)) {
 										canCastle = false;
 									}
                 }
-                
+
                 // Check if the final position is valid.
 								if (canCastle) {
 									results = this.checkMoveOptionValidityAndReturnMove(
-                    new Move(gridPosition.row, gridPosition.column, gridPosition.row, gridPosition.column - 2), 
+                    new Move(gridPosition.row, gridPosition.column, gridPosition.row, gridPosition.column - 2),
                     boardPiece.pieceColor, boardToTest);
                   moves.push(...results[1]);
 								}
@@ -1536,14 +1536,14 @@ class ChessPlayer {
         }
       }
     }
-    
+
     return moves;
   }
-  
+
   checkForCheck(boardToTest, teamColor) {
     // TODOB: use struct
     let ourKingPosition = new GridPosition();
-    
+
     // Go through the board and find our KING's position.
     // TODO: use `every` (see https://stackoverflow.com/a/34425841), need to do double loop exit
     for (let iRow = 0; iRow < this.chessBoard.boardDimensions; iRow++) {
@@ -1560,12 +1560,12 @@ class ChessPlayer {
 				}
       }
     }
-      
+
     // Now we have our king's position; lets check if it is under attack from anywhere.
 		// Horizontal - Right
     let col = ourKingPosition.column;
     while(++col < this.chessBoard.boardDimensions) {
-      
+
       let currentPiece;
       try {
         currentPiece = boardToTest.boardLayout[ourKingPosition.row][col];
@@ -1573,7 +1573,7 @@ class ChessPlayer {
       catch(err) {
         console.log('test');
       }
-      
+
       if (currentPiece.pieceType != Game.pieceType.None) {
 				if (currentPiece.pieceColor == teamColor) {
 					break;
@@ -1584,7 +1584,7 @@ class ChessPlayer {
 				}
 			}
     }
-      
+
     // Horizontal - Left
     col = ourKingPosition.column;
     while (--col >= 0) {
@@ -1599,7 +1599,7 @@ class ChessPlayer {
 				}
 			}
     }
-      
+
     // Vertical - Up
     let row = ourKingPosition.row;
     while (--row >= 0) {
@@ -1614,7 +1614,7 @@ class ChessPlayer {
 				}
 			}
     }
-    
+
     // Vertical - Down
     row = ourKingPosition.row;
     while (++row < this.chessBoard.boardDimensions) {
@@ -1628,8 +1628,8 @@ class ChessPlayer {
 					break;
 				}
 			}
-    } 
-      
+    }
+
     // Diagonal - Right Down
     row = ourKingPosition.row;
 		col = ourKingPosition.column;
@@ -1644,9 +1644,9 @@ class ChessPlayer {
 					break;
 				}
 			}
-    } 
-    
-    // Diagonal - Right Up  
+    }
+
+    // Diagonal - Right Up
     row = ourKingPosition.row;
 		col = ourKingPosition.column;
     while (--row >= 0 && ++col < this.chessBoard.boardDimensions) {
@@ -1660,9 +1660,9 @@ class ChessPlayer {
 					break;
 				}
 			}
-    } 
-      
-    // Diagonal - Left Down  
+    }
+
+    // Diagonal - Left Down
     row = ourKingPosition.row;
 		col = ourKingPosition.column;
     while (++row < this.chessBoard.boardDimensions && --col >= 0) {
@@ -1676,8 +1676,8 @@ class ChessPlayer {
 					break;
 				}
 			}
-    }   
-      
+    }
+
     // Diagonal - Left Up
     row = ourKingPosition.row;
 		col = ourKingPosition.column;
@@ -1692,9 +1692,9 @@ class ChessPlayer {
 					break;
 				}
 			}
-    }     
-    
-    // Awkward Knight moves 
+    }
+
+    // Awkward Knight moves
     // #1
     row = ourKingPosition.row + 1;
 		col = ourKingPosition.column + 2;
@@ -1703,8 +1703,8 @@ class ChessPlayer {
       if (currentPiece.pieceColor != teamColor && currentPiece.pieceType == Game.pieceType.Knight) {
         return true;
 			}
-    }       
-    
+    }
+
     // #2
     row = ourKingPosition.row - 1;
 		col = ourKingPosition.column + 2;
@@ -1713,8 +1713,8 @@ class ChessPlayer {
       if (currentPiece.pieceColor != teamColor && currentPiece.pieceType == Game.pieceType.Knight) {
         return true;
 			}
-    } 
-    
+    }
+
     // #3
     row = ourKingPosition.row + 2;
 		col = ourKingPosition.column + 1;
@@ -1723,8 +1723,8 @@ class ChessPlayer {
       if (currentPiece.pieceColor != teamColor && currentPiece.pieceType == Game.pieceType.Knight) {
         return true;
 			}
-    } 
-    
+    }
+
     // #4
     row = ourKingPosition.row + 2;
 		col = ourKingPosition.column - 1;
@@ -1733,8 +1733,8 @@ class ChessPlayer {
       if (currentPiece.pieceColor != teamColor && currentPiece.pieceType == Game.pieceType.Knight) {
         return true;
 			}
-    }  
-    
+    }
+
     // #5
     row = ourKingPosition.row + 1;
 		col = ourKingPosition.column - 2;
@@ -1743,8 +1743,8 @@ class ChessPlayer {
       if (currentPiece.pieceColor != teamColor && currentPiece.pieceType == Game.pieceType.Knight) {
         return true;
 			}
-    }  
-      
+    }
+
     // #6
     row = ourKingPosition.row - 1;
 		col = ourKingPosition.column - 2;
@@ -1753,8 +1753,8 @@ class ChessPlayer {
       if (currentPiece.pieceColor != teamColor && currentPiece.pieceType == Game.pieceType.Knight) {
         return true;
 			}
-    } 
-      
+    }
+
     // #7
     row = ourKingPosition.row - 2;
 		col = ourKingPosition.column - 1;
@@ -1764,7 +1764,7 @@ class ChessPlayer {
         return true;
 			}
     }
-      
+
     // #8
     row = ourKingPosition.row - 2;
 		col = ourKingPosition.column + 1;
@@ -1774,7 +1774,7 @@ class ChessPlayer {
         return true;
 			}
     }
-      
+
     // Opponent King positions
     for (let row = ourKingPosition.row - 1; row < ourKingPosition.row + 1; row++) {
       for(let col = ourKingPosition.col - 1; col < ourKingPosition.column + 2; col++) {
@@ -1786,7 +1786,7 @@ class ChessPlayer {
         }
       }
     }
-      
+
     // Opponent Pawns
     let opponentPawnDirection = teamColor == Game.pieceColor.White ? 1 : -1;
 		row = ourKingPosition.row + opponentPawnDirection;
@@ -1806,10 +1806,10 @@ class ChessPlayer {
 				return true;
 			}
 		}
-      
+
     return false;
   }
-  
+
   checkForCheckmate(boardToCheck, teamColor) {
     // If we are in CHECK, can we actually make a move to get us out of it?
 		if (this.#bInCheck) {
@@ -1822,10 +1822,10 @@ class ChessPlayer {
 				return true;
 			}
 		}
-      
+
     return false;
   }
-  
+
   checkForStalemate(boardToCheck, teamColor) {
     // If we are not in CHECK, can we actually make a move? If not then we are in a STALEMATE.
 		if (!this.#bInCheck) {
@@ -1839,7 +1839,7 @@ class ChessPlayer {
 				return true;
 			}
 		}
-    
+
     return false;
   }
 }
@@ -1852,18 +1852,18 @@ class ChessPlayerAI extends ChessPlayer {
   chessOpenings = null;
   useChessOpenings = true;
   bestMove = null;
-  
+
   //--------------------------------------------------------------------------------------------------
   /* Private */
   #maxInt = 99999;
-  
+
   #kPawnScore        = 2;
   #kKnightScore      = 10;
   #kBishopScore      = 10;
   #kRookScore        = 25;
   #kQueenScore       = 50;
   #kKingScore        = 100;
-  
+
   #kCheckScore       = 20; // 20
   #kCheckmateScore   = 1000; // 1000
   #kStalemateScore   = 25; // Tricky one because sometimes you want this, sometimes you don't. (25)
@@ -1873,17 +1873,17 @@ class ChessPlayerAI extends ChessPlayer {
   #kPositionalWeight = 1; // Whether in CHECK, CHECKMATE or STALEMATE. (1)
   //--------------------------------------------------------------------------------------------------
   playing = false;
-  
+
   constructor(color, chessBoard, bMyTurn) {
     super(color, chessBoard, bMyTurn);
   }
-  
+
   start() {
     if (this.useChessOpenings) {
       this.chessOpenings = new ChessOpenings(this.color);
     }
   }
-  
+
   update() {
     // NOTEB: do we need to check if the chessboard is setup?
     if (this.chessBoard != null && this.chessBoard.boardLayout != null) {
@@ -1915,7 +1915,7 @@ class ChessPlayerAI extends ChessPlayer {
       }
     }
   }
-  
+
   makeAMove(move) {
     // If this was an en'passant move the taken piece will not be in the square we moved to.
 		if (this.chessBoard.boardLayout[move.fromRow][move.fromCol].pieceType == Game.pieceType.Pawn) {
@@ -1924,7 +1924,7 @@ class ChessPlayerAI extends ChessPlayer {
         this.chessBoard.boardLayout[move.fromRow, move.fromCol].bCanEnPassant = true;
       }
     }
-    
+
     // En'Passant removal of enemy pawn.
 		// If our pawn moved into an empty position to the left or right, then must be En'Passant.
 		if (this.chessBoard.boardLayout[move.fromRow][move.fromCol].pieceType == Game.pieceType.Pawn &&
@@ -1935,7 +1935,7 @@ class ChessPlayerAI extends ChessPlayer {
 				this.chessBoard.killPiece(move.toRow + pawnDirectionOpposite, move.toCol);
 			}
     }
-    
+
     // CASTLING - Move the rook.
 		if (this.chessBoard.boardLayout[move.fromRow, move.fromCol].pieceType == Game.pieceType.King) {
       // Are we moving 2 spaces??? This indicates CASTLING.
@@ -1947,19 +1947,19 @@ class ChessPlayerAI extends ChessPlayer {
 				this.chessBoard.movePiece(move.fromRow, move.fromCol - 3, move.fromRow, move.fromCol - 1);
       }
     }
-    
+
     // Kill any piece in this new position.
 		this.chessBoard.killPiece(move.toRow, move.toCol);
 
 		// Move the piece into new position.
 		this.chessBoard.movePiece(move.fromRow, move.fromCol, move.toRow, move.toCol);
   }
-  
+
   takeATurn() {
     // Play opening book, or calculate best move.
     let score = 0;
     this.bestMove = new Move();
-    
+
     if (this.chessOpenings !== null && this.chessOpenings.isAnotherMoveAvailable()) {
       // Play opening.
       // `GetNextMove` could return a `null` move but within this `if` condition, it is
@@ -1971,19 +1971,19 @@ class ChessPlayerAI extends ChessPlayer {
       score = this.miniMax(this.chessBoard);
       console.log('takeATurn(), score = ' + score)
     }
-    
+
     // Now we have the best move, do it.
     this.makeAMove(this.bestMove);
-    
+
     // Allow opponent to take their turn.
 		this.bMyTurn = false;
 		this.opponentPlayer.setTurn(true);
   }
-  
+
   miniMax(boardToTest) {
     return this.maximise(boardToTest, this.searchDepth, this.#maxInt);
   }
-  
+
   maximise(boardToTest, currentSearchDepth, parentLow) {
     // Reach terminal node so return the heuristic.
 		if (currentSearchDepth == 0) {
@@ -2004,7 +2004,7 @@ class ChessPlayerAI extends ChessPlayer {
         if (opponentPiece.pieceType == Game.pieceType.King && opponentPiece.pieceColor != this.color) {
           continue;
         }
-        
+
 				//Only check if our best highest is less than parent's low, otherwise stop.
 				//Any further checks resulting positively will only get higher and therefore be
 				//higher than the parent low, which means they will be discarded.
@@ -2015,7 +2015,7 @@ class ChessPlayerAI extends ChessPlayer {
 				else {
 					// Reconfigure the board using this move.
 					tempBoard.copyInternalBoard(boardToTest);
-					tempBoard.movePiece(this.minimaxMoves[key][i].fromRow, this.minimaxMoves[key][i].fromCol, 
+					tempBoard.movePiece(this.minimaxMoves[key][i].fromRow, this.minimaxMoves[key][i].fromCol,
                               this.minimaxMoves[key][i].toRow, this.minimaxMoves[key][i].toCol);
 
 					// Dig deeper with the board constructed in this new configuration.
@@ -2035,7 +2035,7 @@ class ChessPlayerAI extends ChessPlayer {
 
 		return bestValue;
   }
-  
+
   minimise(boardToTest, currentSearchDepth, parentHigh) {
     // Reach terminal node so return the heuristic.
 		if (currentSearchDepth == 0) {
@@ -2057,7 +2057,7 @@ class ChessPlayerAI extends ChessPlayer {
         if (opponentPiece.pieceType == Game.pieceType.King && opponentPiece.pieceColor != this.color) {
           continue;
         }
-        
+
 				// Only check if our best lowest is greater than parent's high, otherwise stop.
 				// Any further checks resulting positively will only get lower and therefore be
 				// lower than the parent high, which means they will be discarded.
@@ -2067,7 +2067,7 @@ class ChessPlayerAI extends ChessPlayer {
         } else {
 					// Reconfigure the board using this move.
 					tempBoard.copyInternalBoard(boardToTest);
-					tempBoard.movePiece(this.minimaxMoves[key][i].fromRow, this.minimaxMoves[key][i].fromCol, 
+					tempBoard.movePiece(this.minimaxMoves[key][i].fromRow, this.minimaxMoves[key][i].fromCol,
                               this.minimaxMoves[key][i].toRow, this.minimaxMoves[key][i].toCol);
 
 					// Dig deeper with the board constructed in this new configuration.
@@ -2081,7 +2081,7 @@ class ChessPlayerAI extends ChessPlayer {
 
 		return bestValue;
   }
-  
+
   scoreTheBoard(boardToScore) {
     let pieceScore = 0;
 		let moveScore = 0;
@@ -2112,7 +2112,7 @@ class ChessPlayerAI extends ChessPlayer {
 						} else {
 							pieceScore -= this.#kPawnScore;
 						}
-						break; 
+						break;
 
 					case Game.pieceType.Knight:
 						if (currentPiece.pieceColor == this.color) {
