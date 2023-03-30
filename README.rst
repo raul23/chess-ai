@@ -103,7 +103,7 @@ Instructions
      </div>
      <div align="center">
        <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
-         <img src="./images/pawn_promotion2.png">
+         <img src="./images/pawn_promotion2.png" width="398" height="166">
        </a>
        <p align="center">Pawn promoted to Queen</p>
      </div>
