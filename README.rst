@@ -53,16 +53,8 @@ The game now runs "fine" but there are still `things to be done <#things-to-be-d
 
 Test it live and source code ⭐
 -------------------------------
-- `codepen.io <https://codepen.io/raul23/full/eYLLJbJ>`_ (**Test it live** with fullscreen)
-- `codepen.io <https://codepen.io/raul23/pen/eYLLJbJ>`_ (source code)
-
-`:information_source:`
- 
- Obviously, on `codepen.io <https://codepen.io/raul23/full/eYLLJbJ>`_, the whole code is in one file. However, 
- the source code on GitHub will be divided into
- different files (e.g. Game.js, Piece.js) just like the original chess project `ChessJs <https://github.com/Jexan/ChessJs>`_.
- 
- I will add the source code divided into multiple files on GitHub later.
+- `codepen.io <https://codepen.io/raul23/full/WNgPJJj>`_ (**Test it live** with fullscreen)
+- `codepen.io <https://codepen.io/raul23/pen/WNgPJJj>`_ (source code)
 
 Instructions
 ------------
@@ -73,10 +65,10 @@ Instructions
   .. raw:: html
 
       <div align="center">
-       <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
-         <img src="./images/chess_highlighted2.png">
+       <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+         <img src="./images/chess_highlighted.png">
        </a>
-       <p align="center">Highlighted moves for the black bishop</p>
+       <p align="center">Highlighted moves for the bishop</p>
      </div>
 - Each pawn has the possibility to move two squares in front when it is moved for the first time
 
