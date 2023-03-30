@@ -118,7 +118,7 @@ The game AI consists of the following two elements:
 
 - Minimax with AlphaBeta pruning
 
-  - Search depth (by default is 1)
+  - Search depth (by default is 3)
   - Game scoring: every possible move is scored based on the following parameters
     
     Scores for each game piece:
