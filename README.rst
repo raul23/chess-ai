@@ -60,7 +60,7 @@ Instructions
 ------------
 - The AI controls the black pieces and the user, the white ones.
 - **Highlighted moves:** when clicking on one of your game pieces, squares get highlighted on the chessboard to let
-  you know which possible moves you can make with the given piece. Click on one of the highlighted square to move the piece.
+  you know which possible moves you can make with the given piece. Click on one of the highlighted squares to move the piece.
   
   .. raw:: html
 
@@ -76,7 +76,7 @@ Instructions
 
       <div align="center">
        <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
-         <img src="./images/chess_pawn_two_squares2.png">
+         <img src="./images/chess_pawn_two_squares.png">
        </a>
      </div>
 
