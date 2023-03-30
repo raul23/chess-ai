@@ -2,6 +2,7 @@
 /*      ChessConstants.js     */
 /******************************/
 // JavaScript Enums @ https://masteringjs.io/tutorials/fundamentals/enum
+//test
 function createEnum(values) {
   const enumObject = {};
   for (const val of values) {
