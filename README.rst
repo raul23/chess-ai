@@ -70,6 +70,18 @@ Instructions
        </a>
        <p align="center">Highlighted moves for the bishop</p>
      </div>
+     
+  Only valid possibles moves are highlighted, in particular those that could put you in check are not shown.
+  
+  .. raw:: html
+
+      <div align="center">
+       <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+         <img src="./images/chess_highlighted_valid_only.png">
+       </a>
+       <p align="center">Highlighted moves for the white queen: those that could put you in check are not shown</p>
+     </div>
+  
 - Each pawn has the possibility to move two squares in front when it is moved for the first time
 
   .. raw:: html
