@@ -82,7 +82,7 @@ Instructions
        <p align="center">Highlighted moves for the white queen: those that could put you in check are not shown</p>
      </div>
   
-- Each pawn has the possibility to move two squares in front when it is moved for the first time
+- Each pawn has the possibility to move two squares in front when it is moved for the first time.
 
   .. raw:: html
 
@@ -90,6 +90,22 @@ Instructions
        <a href="https://codepen.io/raul23/full/eYLLJbJ" target="_blank">
          <img src="./images/chess_pawn_two_squares.png">
        </a>
+     </div>
+
+- Once a pawn gets completely to the other side of the chess board, it gets promoted to queen.
+
+  .. raw:: html
+
+      <div align="center">
+       <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+         <img src="./images/pawn_promotion1.png">
+       </a>
+     </div>
+     <div align="center">
+       <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+         <img src="./images/pawn_promotion2.png">
+       </a>
+       <p align="center">Pawn promoted to Queen</p>
      </div>
 
 Game AI
