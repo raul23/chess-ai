@@ -167,6 +167,13 @@ Instructions
 
 Game AI
 -------
+`:warning:`
+
+ When playing against the AI player, there will be a noticeable delay before the AI player makes its move (you can check
+ the console to know what is going on) because the default search depth used for the minimax algorithm is 3. A search depth
+ of 2 makes the AI player computes faster its moves but I don't think a search depth of 2 can give the AI player 
+ plenty of good moves to choose from.
+
 I ported the game AI implemented as C# (+ Unity) code from Paul Roberts' book 
 `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_ to 
 JavaScript using the ``phaser.js`` 2D game development library.
