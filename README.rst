@@ -44,10 +44,10 @@ in modifying some parts of their codebase such as these:
 Thereafter, I implemented the game AI in the form of `Minimax with AlphaBeta pruning <#game-ai>`_ based on the
 C# code by Paul Roberts from his book `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. 
 
-Unfortunately, I wasn't able to to make most of **ChessJs** code to work with the game AI from the book which used
+Unfortunately, I wasn't able to to make most of **ChessJs** code work with the game AI from the book which used
 a different way of coding the chess game. Thus, I decided to abandon **ChessJs** codebase and ported the whole C# 
 chess code from Paul Roberts' book `Artificial Intelligence in Games 
-<https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_.  
+<https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_ to JavaScript.  
 
 The game now runs fine but there are still `things to be done <#things-to-be-done>`_.
 
