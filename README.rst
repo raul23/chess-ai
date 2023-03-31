@@ -107,11 +107,11 @@ Here are the changes that I made when porting the C# chess program to JavaScript
   return the list of moves ``moves``.
   
   Thus ``checkMoveOptionValidityAndStoreMove`` was renamed to ``checkMoveOptionValidityAndReturnMove`` since this method
-  now returns the list of moves ``moves`` after checking their validity (e.g. not putting the user in check) along with
-  a boolean value that tells you whether there are more valid moves in the current direction (e.g. the selected move 
+  now returns the list of moves ``moves`` after checking their validity (e.g. not putting the player in check) along with
+  a boolean value that tells whether there are more valid moves in the current direction (e.g. the selected move 
   hits an opponent piece).
 
-- I am adding a delay of 1 second before the AI agent starts its turn in order to be able to draw the human player's
+- I am adding a delay of 1 second before the AI player starts its turn in order to be able to draw the human player's
   move before the AI's turn. If there is not this delay, the human player's move will get drawn at the same time as the
   AI player's move.
 
