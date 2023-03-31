@@ -53,7 +53,7 @@ The game now runs fine but there are still `things to be done <#things-to-be-don
 
 `:information_source:`
 
- I am still using the pieces and chessboard images from `ChessJs <https://github.com/Jexan/ChessJs>`_ 
+ I am using the pieces and chessboard images from `ChessJs <https://github.com/Jexan/ChessJs>`_ 
  
  .. raw:: html
  
