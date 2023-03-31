@@ -22,13 +22,8 @@ JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
 
 Introduction
 ------------
-`:information_source:`
-
- `ChessJs <https://github.com/Jexan/ChessJs>`_: A simple chess game made with Javascript and Phaser
- 
- Developed by `Jexan <https://github.com/Jexan>`_
- 
-I started from Jexan's **ChessJs** which is based on the following two JavaScript libraries:
+I started from `Jexan <https://github.com/Jexan>`_'s 
+`ChessJs <https://github.com/Jexan/ChessJs>`_ which is based on the following two JavaScript libraries:
 
 - `Phaser v2.0.5 <https://github.com/Jexan/ChessJs/blob/master/lib/phaser.min.js>`_
 - `Underscore.js 1.6.0 <https://github.com/Jexan/ChessJs/blob/master/lib/underscore-min.js>`_
@@ -37,7 +32,7 @@ I tried to run the actual project with these old libraries but couldn't make the
 as it can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
 
 Therefore I decided to use the latest libraries (``phaser@3.55.2`` and ``underscore@1.13.6``) which resulted
-in modifying some parts of the code such as these:
+in modifying some parts of the codebase such as these:
 
 - ``add.sprite`` instead of ``add.image``
 - ``group.clear(true)`` instead of ``group.removeAll()``
@@ -49,12 +44,29 @@ in modifying some parts of the code such as these:
 Thereafter, I implemented the game AI in the form of `Minimax with AlphaBeta pruning <#game-ai>`_ based on the
 C# code by Paul Roberts' book `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. 
 
-The game now runs "fine" but there are still `things to be done <#things-to-be-done>`_.
+Unfortunately, I wasn't able to to make most of **ChessJs** code to work with the game AI from the book which used
+a different way of coding the chess game. Thus, I decided to abandon most of **ChessJs** codebase and port the whole C# 
+chess code from Paul Roberts' book `Artificial Intelligence in Games 
+<https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_.  
+
+The game now runs fine but there are still `things to be done <#things-to-be-done>`_.
+
+`:information_source:`
+
+ I am still using the pieces and chessboard images from `ChessJs <https://github.com/Jexan/ChessJs>`_ 
+ 
+ .. raw:: html
+ 
+    <div align="center">
+       <a href="https://github.com/Jexan/ChessJs/blob/master/imgs/assets.png" target="_blank">
+         <img src="./images/assets.png">
+       </a>
+    </div>
 
 Test it live and source code ⭐
 -------------------------------
 - `codepen.io <https://codepen.io/raul23/full/WNgPJJj>`_ (**Test it live** with fullscreen)
-- `codepen.io <https://codepen.io/raul23/pen/WNgPJJj>`_ (source code)
+- `codepen.io <./code/javascript>`_ (source code)
 
 Instructions
 ------------
