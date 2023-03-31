@@ -109,7 +109,7 @@ Here are the changes that I made when porting the C# chess program:
   a boolean value that tells you whether there are more valid moves in the current direction (e.g. the selected move 
   hits an opponent piece).
 
-- I am adding a small delay of 1 sec before the AI agent starts its turn in order to be able to draw the human player's
+- I am adding a delay of 1 second before the AI agent starts its turn in order to be able to draw the human player's
   move before the AI's turn. If there is not this delay, the human player's move will get drawn at the same time as the
   AI player's move.
 
