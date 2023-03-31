@@ -63,9 +63,11 @@ The game now runs fine but there are still `things to be done <#things-to-be-don
        </a>
     </div>
 
-Test it live and source code ⭐
--------------------------------
-- `codepen.io <https://codepen.io/raul23/full/WNgPJJj>`_ (**Test it live** with fullscreen)
+Source code
+-----------
+Test it live ⭐
+""""""""""""
+- `codepen.io <https://codepen.io/raul23/full/WNgPJJj>`_ (**Test it live**) ⭐
 - `github.com <./code/javascript>`_ (source code)
 
 Source code
