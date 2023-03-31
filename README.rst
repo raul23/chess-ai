@@ -32,7 +32,7 @@ I tried to run their actual project with these old libraries but couldn't make t
 as it can be seen here: `codepen.io <https://codepen.io/raul23/pen/NWLYZOm>`_
 
 Therefore I decided to use more recent libraries (``phaser@3.55.2`` and ``underscore@1.13.6``) which resulted
-in modifying some parts of the codebase such as these:
+in modifying some parts of their codebase such as these:
 
 - ``add.sprite`` instead of ``add.image``
 - ``group.clear(true)`` instead of ``group.removeAll()``
