@@ -8,8 +8,8 @@ Exploring AI applied to chess
    :local:
    :backlinks: top
 
-JavaScript implementation: upgraded ChessJs to Phaser 3 [Work-in-Progress 🚧]
-=============================================================================
+JavaScript implementation: [Work-in-Progress 🚧]
+================================================
 .. raw:: html
 
    <div align="center">
