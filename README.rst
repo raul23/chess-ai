@@ -171,7 +171,7 @@ Game AI
 
  When playing against the AI player, there will be a noticeable delay before the AI player makes its move (you can check
  the console to know what is going on) because the default search depth used for the minimax algorithm is 3. A search depth
- of 2 makes the AI player computes faster its moves but I don't think a search depth of 2 can give the AI player 
+ of 2 makes the AI player computes its moves quicker but I don't think such a small search depth can give the AI player 
  plenty of good moves to choose from.
 
 I ported the game AI implemented as C# (+ Unity) code from Paul Roberts' book 
