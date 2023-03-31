@@ -151,7 +151,7 @@ Instructions
        </a>
      </div>
 
-- Once a pawn gets completely to the other side of the chess board, it gets promoted to queen.
+- Once a pawn goes completely to the other side of the chess board, it gets promoted to queen.
 
   .. raw:: html
 
