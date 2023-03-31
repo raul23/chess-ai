@@ -73,7 +73,7 @@ Source code
 `:information_source:` 
 
  - `script.js <./code/javascript/script.js>`_ (JavaScript source code)
- - It is a JavaScript port of the C# chess program by Paul Roberts' 
+ - It is a JavaScript port of the C# chess program from Paul Roberts' 
    book `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. 
 
 Here are the changes that I added when porting the C# chess program:
