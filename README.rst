@@ -174,7 +174,7 @@ Game AI
  of 2 makes the AI player computes its moves quicker but I don't think such a small search depth can give the AI player 
  plenty of good moves to choose from.
 
-I ported the game AI implemented as C# (+ Unity) code from Paul Roberts' book 
+I ported the chess game AI implemented as C# (+ Unity) from Paul Roberts' book 
 `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_ to 
 JavaScript using the ``phaser.js`` 2D game development library.
 
