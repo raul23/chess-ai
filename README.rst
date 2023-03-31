@@ -66,7 +66,52 @@ The game now runs fine but there are still `things to be done <#things-to-be-don
 Test it live and source code ⭐
 -------------------------------
 - `codepen.io <https://codepen.io/raul23/full/WNgPJJj>`_ (**Test it live** with fullscreen)
-- `codepen.io <./code/javascript>`_ (source code)
+- `github.com <./code/javascript>`_ (source code)
+
+Source code
+"""""""""""
+`:information_source:` 
+
+ - `script.js <./code/javascript/script.js>`_ (JavaScript source code)
+ - It is a JavaScript port of the C# chess program by Paul Roberts' 
+   book `Artificial Intelligence in Games <https://www.routledge.com/Artificial-Intelligence-in-Games/Roberts/p/book/9781032033228>`_. 
+
+Here are the changes that I added when porting the C# chess program:
+
+- After selecting one of the highlighted positions, it is important to update the selected piece position's row and column to 
+  reflect the new position of the chess piece that just moved:
+  
+  .. code-block:: javascript
+  
+     // Save new selected piece position
+     this.selectedPiecePosition.row = gridPosition.row;
+     this.selectedPiecePosition.column = gridPosition.column;
+
+- After moving a piece (except when moving a piece to the other end of the chessboard, i.e. pawn promotion), it is necessary
+  to update the current move type to ``SelectAPiece``:
+  
+  .. code-block:: javascript
+  
+     this.eCurrentMoveType = Game.moveType.SelectAPiece;
+     
+- Same after promoting a pawn, the move type needs to be updated to ``SelectAPiece``:
+
+  .. code-block:: javascript
+  
+     } else if (this.eCurrentMoveType == Game.moveType.PawnPromotion) {
+       this.eCurrentMoveType = Game.moveType.SelectAPiece;
+
+- I am not passing ``moves`` as reference to the various methods (e.g. ``getAllMoveOptions``). Instead, the methods
+  return the list of moves ``moves``.
+  
+  Thus ``checkMoveOptionValidityAndStoreMove`` was renamed to ``checkMoveOptionValidityAndReturnMove`` since this method
+  now returns the list of moves ``moves`` after checking their validity (e.g. not putting the user in check) along with
+  a boolean value that tells you whether there are more valid moves in the current direction (e.g. the selected move 
+  hits an opponent piece).
+
+- I am adding a small delay of 1 sec before the AI agent starts its turn in order to be able to draw the human player's
+  move before the AI's turn. If there is not this delay, the human player's move will get drawn at the same time as the
+  AI player's move.
 
 Instructions
 ------------
