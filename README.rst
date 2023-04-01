@@ -171,6 +171,10 @@ Game states
 -----------
 Checkmate
 """""""""
+`:information_source:` From `chess.com <https://www.chess.com/terms/checkmate-chess>`_
+
+ When a king is attacked, it is called check. A **checkmate** occurs when a king is placed in check and has no legal moves to escape.
+
 .. raw:: html
 
    <div align="center">
@@ -182,6 +186,11 @@ Checkmate
 
 Stalemate
 """""""""
+`:information_source:` From `chess.com <https://support.chess.com/article/682-what-is-stalemate>`_
+
+ **Stalemate** is a kind of draw that happens when **one side has NO legal moves to make.** If the king is NOT in check, 
+ but **no piece can be moved without putting the king in check,** then the game will end with a stalemate draw! 
+
 .. raw:: html
 
    <div align="center">
