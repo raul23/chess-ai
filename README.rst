@@ -164,7 +164,23 @@ Instructions
        <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
          <img src="./images/pawn_promotion2.png" width="434" height="170">
        </a>
-       <p align="center">Pawn promoted to Queen</p>
+       <p align="center">White Pawn promoted to Queen</p>
+     </div>
+
+  |
+
+  .. raw:: html
+
+     <div align="center">
+       <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+         <img src="./images/pawn_promotion3.png">
+       </a>
+     </div>
+     <div align="center">
+       <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+         <img src="./images/pawn_promotion4.png">
+       </a>
+       <p align="center">Black Pawn promoted to Queen</p>
      </div>
 
 Game states
