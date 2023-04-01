@@ -167,6 +167,30 @@ Instructions
        <p align="center">Pawn promoted to Queen</p>
      </div>
 
+Game states
+-----------
+Checkmate
+"""""""""
+.. raw:: html
+
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/checkmate2.png">
+     </a>
+     <p align="center">Checkmate</p>
+   </div>
+
+Stalemate
+"""""""""
+.. raw:: html
+
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/stalemate.png">
+     </a>
+     <p align="center">Stalemate</p>
+   </div>
+
 Game AI
 -------
 `:warning:`
