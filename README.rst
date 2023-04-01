@@ -264,13 +264,8 @@ Things to be done
 -----------------
 In order of importance, these are the things still to be done for this Chess project:
   
-- Add ending code: right now the game doesn't end when you do checkmate
-
-  These are the game states that need to be checked:
+- Show a warning message if a player is in check
   
-  - check
-  - checkmate
-  - stalemate
 - Test the following moves:
 
   - Encastling
