@@ -107,7 +107,7 @@ const Game = {
   assetsKey: 'assets',
   assetsFilePath: 'https://raw.githubusercontent.com/Jexan/ChessJs/master/imgs/assets.png',
 
-  turn: pieceColor.White, // White starts first
+  turn: pieceColor.White, // White starts first; TODO: check if it is still being used
   turnTextStyle: {
     font: '18pt Segoe UI',
     fill: 'black'
@@ -115,6 +115,11 @@ const Game = {
   turnTextColorStyle: {
     font: '18pt Segoe UI',
     fill: '#333'
+  },
+
+  gameOverTextStyle: {
+    font: '18pt Segoe UI',
+    fill: 'blue'
   }
 }
 
@@ -132,6 +137,11 @@ Game.turnTextY = Game.windowWidth + 5;
 
 Game.turnColorTextY = Game.turnTextY + Game.squareLength * 0.01;
 Game.turnColorTextX = Game.turnTextX + Game.squareLength * 1.5;
+
+Game.gameOverTextX = 150;
+Game.gameOverTextY = 150;
+
+Game.over = false;
 
 var preload = function() {
   Game.scene = this;
@@ -169,11 +179,24 @@ var create = function() {
     Game.pieceColor.White,
     Game.turnTextColorStyle
   );
+
+  this.gameOverText = this.add.text(
+    Game.gameOverTextX,
+    Game.gameOverTextY,
+    '',
+    Game.gameOverTextStyle
+  );
 };
 
 var update = function() {
-  Game.chessPlayerAI.update();
-  Game.chessPlayer.finishTurn();
+  if (!Game.over) {
+    Game.chessPlayerAI.update();
+    Game.chessPlayer.finishTurn();
+  } else {
+    //this.sys.game.destroy(true);
+    //console.log('Game ended!')
+    //return;
+  }
 }
 
 const config = {
@@ -319,7 +342,91 @@ class ChessBoard {
     piece.bCanEnPassant = false;
     piece.bHasMoved = false;
 
+    // Pawn promotion for Black and White pawns
+    /*
+    if (row == 1) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.Pawn;
+      }
+      if (column == 1) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    if (row == 6) {
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Pawn;
+      }
+      if (column == 6) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    */
+
+    // Stalemate
+    /*
+    if (row == 0) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    if (row == 6) {
+      if (column == 5) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Queen;
+      }
+    }
+    if (row == 7) {
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    */
+
+    // Checkmate
+    /*
+    if (row == 0) {
+      if (column == 2) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+      if (column == 4) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+      if (column == 5) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Bishop;
+      }
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+    }
+    
+    if (row == 2) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Queen;
+      }
+      if (column == 3) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Queen;
+      }
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Knight;
+      }
+    }
+    */
+
     // Set type and color:
+    //*
     if (row == 0) {
       piece.pieceColor = Game.pieceColor.White;
       switch (column) {
@@ -353,7 +460,6 @@ class ChessBoard {
       piece.pieceType = Game.pieceType.Pawn;
     } else if (row == 6) {
       piece.pieceColor = Game.pieceColor.Black;
-      //piece.pieceColor = Game.pieceColor.White;
       piece.pieceType = Game.pieceType.Pawn;
     } else if (row == 7) {
       piece.pieceColor = Game.pieceColor.Black;
@@ -384,6 +490,7 @@ class ChessBoard {
           break;
       }
     }
+    //*/
 
     return piece;
   }
@@ -770,11 +877,10 @@ var randomPropertyValue = function(obj) {
 /******************************/
 class ChessPlayer {
   kTotalNumberOfStartingPieces = 16;
-  gameOverOptions = null;
+  gameOverOptions = null; // NOTEB: protected
 
-  // TODO: set following as private
-  chessBoard = null;
-  // TODO: set
+  // TODO: `null`?
+  chessBoard = null; // NOTEB: protected
   opponentPlayer = null;
 
   bMyTurn = true;
@@ -784,19 +890,19 @@ class ChessPlayer {
   #iNumberOfLivingPieces = this.kTotalNumberOfStartingPieces;
   #bInCheck = false;
 
-  // TODO: protected with #?
-  eCurrentMoveType = Game.moveType.SelectAPiece;
-  moveOptions = []; // GridPosition
+  eCurrentMoveType = Game.moveType.SelectAPiece; //NOTEB: protected
+  moveOptions = []; // GridPosition; NOTEB: protected
 
-  selectedPiecePosition = new GridPosition(); // `GridPosition`; Position to move piece to.
+  selectedPiecePosition = new GridPosition(); // `GridPosition`; Position to move piece to.; NOTEB: protected
 
-  moves = [];
+  moves = []; // TODO: remove since it it not used anymore
   minimaxMoves = [];
 
   constructor(color, chessBoard, bMyTurn = true) {
     this.color = color;
     this.chessBoard = chessBoard;
     this.bMyTurn = bMyTurn;
+    this.gameOverOptions = new ChessGameOverOptions();
   }
 
   setTurn(bturn) {
@@ -815,7 +921,13 @@ class ChessPlayer {
         }
       } else if (gameState == Game.gameState.Checkmate || gameState == Game.gameState.Stalemate) {
         // We have an end to the game, so let the game over canvas show the player.
-        console.log('GAME OVER');
+        console.log('GAME OVER: ChessPlayerAI won!');
+        if (this.gameOverOptions !== null) {
+          let opponentColor = this.color == Game.pieceColor.White ? Game.pieceColor.Black : Game.pieceColor.White;
+          this.gameOverOptions.setWinner(gameState, opponentColor);
+          this.gameOverOptions.showGameOverCanvas();
+          Game.over = true;
+        }
       }
     }
   }
@@ -1410,7 +1522,7 @@ class ChessPlayer {
     results = this.checkMoveOptionValidityAndReturnMove(move, boardPiece.pieceColor, boardToTest);
     moves.push(...results[1]);
 
-    // IMPORTANT: create same kind of object everytime because if I don't and the reference is changed, then
+    // IMPORTANT: create same kind of object everytime because if I don't and the reference is changed, then 
     // the change gets propagated henceforth
     move = new Move(gridPosition.row, gridPosition.column, gridPosition.row - 1, gridPosition.column + 2);
     results = this.checkMoveOptionValidityAndReturnMove(move, boardPiece.pieceColor, boardToTest);
@@ -1478,7 +1590,9 @@ class ChessPlayer {
           if (gridPosition.column + 4 < this.chessBoard.boardDimensions) {
             let rightRook = boardToTest.boardLayout[gridPosition.row][gridPosition.column + 4];
 
-            if (rightRook.pieceType == Game.pieceType.Rook && !rightRook.bHasMoved) {
+            // `rightRook` or `leftRook` could be undefined if we are debugging and starting the
+            // chessboard with pieces placed anywhere we want
+            if (rightRook && rightRook.pieceType == Game.pieceType.Rook && !rightRook.bHasMoved) {
               if (boardToTest.boardLayout[gridPosition.row][gridPosition.column + 1].pieceType == Game.pieceType.None &&
                 boardToTest.boardLayout[gridPosition.row][gridPosition.column + 2].pieceType == Game.pieceType.None &&
                 boardToTest.boardLayout[gridPosition.row][gridPosition.column + 3].pieceType == Game.pieceType.None) {
@@ -1507,7 +1621,7 @@ class ChessPlayer {
           // CASTLE to the left.
           let leftRook = boardToTest.boardLayout[gridPosition.row][gridPosition.column - 3];
 
-          if (leftRook.pieceType == Game.pieceType.Rook && !leftRook.bHasMoved) {
+          if (leftRook && leftRook.pieceType == Game.pieceType.Rook && !leftRook.bHasMoved) {
             if (gridPosition.column - 3 >= 0) {
               if (boardToTest.boardLayout[gridPosition.row][gridPosition.column - 1].pieceType == Game.pieceType.None &&
                 boardToTest.boardLayout[gridPosition.row][gridPosition.column - 2].pieceType == Game.pieceType.None) {
@@ -1646,7 +1760,7 @@ class ChessPlayer {
       }
     }
 
-    // Diagonal - Right Up
+    // Diagonal - Right Up  
     row = ourKingPosition.row;
     col = ourKingPosition.column;
     while (--row >= 0 && ++col < this.chessBoard.boardDimensions) {
@@ -1662,7 +1776,7 @@ class ChessPlayer {
       }
     }
 
-    // Diagonal - Left Down
+    // Diagonal - Left Down  
     row = ourKingPosition.row;
     col = ourKingPosition.column;
     while (++row < this.chessBoard.boardDimensions && --col >= 0) {
@@ -1694,7 +1808,7 @@ class ChessPlayer {
       }
     }
 
-    // Awkward Knight moves
+    // Awkward Knight moves 
     // #1
     row = ourKingPosition.row + 1;
     col = ourKingPosition.column + 2;
@@ -1901,11 +2015,13 @@ class ChessPlayerAI extends ChessPlayer {
             that.setTurnIndicator();
           } else if (gameState == Game.gameState.Checkmate || gameState == Game.gameState.Stalemate) {
             // We have an end to the game, so let the game over canvas show the player.
-            if (that.gameOverOptions != null) {
+            //console.log('GAME OVER: HumanPlayer won!');
+            if (that.gameOverOptions !== null) {
+              //console.log('GAME OVER: HumanPlayer won!');
               let opponentColor = that.color == Game.pieceColor.White ? Game.pieceColor.Black : Game.pieceColor.White;
-              // TODO
-              //that.gameOverOptions.setWinner(gameState, opponentColor);
-              //that.gameOverOptions.showGameOverCanvas();
+              that.gameOverOptions.setWinner(gameState, opponentColor);
+              that.gameOverOptions.showGameOverCanvas();
+              Game.over = true;
             }
           }
           console.log('End of computations');
@@ -1953,6 +2069,12 @@ class ChessPlayerAI extends ChessPlayer {
 
     // Move the piece into new position.
     this.chessBoard.movePiece(move.fromRow, move.fromCol, move.toRow, move.toCol);
+
+    // Check if we need to promote a pawn.
+    if (this.chessBoard.boardLayout[move.toRow][move.toCol].pieceType == Game.pieceType.Pawn &&
+      (move.toRow == 0 || move.toRow == 7)) {
+      this.chessBoard.swapPieceType(move.toRow, move.toCol, Game.pieceType.Queen);
+    }
   }
 
   takeATurn() {
@@ -2213,5 +2335,28 @@ class ChessPlayerAI extends ChessPlayer {
 
     // Return the overall score for this board.
     return (pieceScore * this.#kPieceWeight) + (moveScore * this.#kMoveWeight) + (positionalScore * this.#kPositionalWeight);
+  }
+}
+
+/*************************************/
+/*      ChessGameOverOptions.js      */
+/*************************************/
+class ChessGameOverOptions {
+  winnerText = '';
+
+  showGameOverCanvas() {
+    Game.scene.gameOverText.setText(this.winnerText);
+  }
+
+  setWinner(gameState, color) {
+    if (gameState == Game.gameState.Checkmate) {
+      if (color == Game.pieceColor.White) {
+        this.winnerText = "WHITE wins!\nCHECKMATE";
+      } else {
+        this.winnerText = "BLACK wins!\nCHECKMATE";
+      }
+    } else if (gameState == Game.gameState.Stalemate) {
+      this.winnerText = "Its a Draw!\nSTALEMATE";
+    }
   }
 }
