@@ -187,7 +187,7 @@ Special moves
 -------------
 Encastling
 """"""""""
-`:information_source:` From `chess.com <https://www.chess.com/terms/check-chess>`_
+`:information_source:` From `chess.com <https://support.chess.com/article/266-how-do-i-castle>`_
 
  The king moves two spaces to the left or to the right, and the rook moves over and in front of the king, all in one move!
  
@@ -233,6 +233,18 @@ Encastling
 
 En passant
 """"""""""
+`:information_source:` From `chess.com <https://www.chess.com/terms/en-passant>`_
+
+ To perform this capture, you must take your opponent's pawn as if it had moved just one square. You move your 
+ pawn diagonally to an adjacent square, one rank farther from where it had been, on the same file where the 
+ enemy's pawn is, and remove the opponent's pawn from the board.
+ 
+ There are a few requirements for the move to be legal:
+
+ - The capturing pawn must have advanced exactly three ranks to perform this move.
+ - The captured pawn must have moved two squares in one move, landing right next to the capturing pawn.
+ - The en passant capture must be performed on the turn immediately after the pawn being captured moves. 
+   If the player does not capture en passant on that turn, they no longer can do it later.
 
 Game states
 -----------
