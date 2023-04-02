@@ -120,7 +120,12 @@ const Game = {
   gameOverTextStyle: {
     font: '18pt Segoe UI',
     fill: 'blue'
-  }
+  },
+
+  checkTextStyle: {
+    font: '12pt Segoe UI',
+    fill: 'red'
+  },
 }
 
 Game.gameState = gameState;
@@ -140,6 +145,9 @@ Game.turnColorTextX = Game.turnTextX + Game.squareLength * 1.5;
 
 Game.gameOverTextX = 150;
 Game.gameOverTextY = 150;
+
+Game.checkTextX = 290;
+Game.checkTextY = Game.windowWidth + 10;
 
 Game.over = false;
 
@@ -185,6 +193,13 @@ var create = function() {
     Game.gameOverTextY,
     '',
     Game.gameOverTextStyle
+  );
+
+  this.checkText = this.add.text(
+    Game.checkTextX,
+    Game.checkTextY,
+    '',
+    Game.checkTextStyle
   );
 };
 
@@ -341,6 +356,50 @@ class ChessBoard {
     piece.pieceColor = Game.pieceColor.None;
     piece.bCanEnPassant = false;
     piece.bHasMoved = false;
+
+    // White in check
+    /*
+    if (row == 1) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+      if (column == 5) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.Bishop;
+      }
+      if (column == 6) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    */
+
+    // Black in check
+    /*
+    if (row == 1) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+      if (column == 5) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Bishop;
+      }
+      if (column == 6) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    */
 
     // Pawn promotion for Black and White pawns
     /*
@@ -944,13 +1003,28 @@ class ChessPlayer {
     this.bMyTurn = false;
     this.opponentPlayer.setTurn(true);
     // Indicators to help the human player.
-    // TODO
-    //this.showCheckWarning();
+    this.showCheckWarning();
     this.setTurnIndicator();
   }
 
   showCheckWarning() {
-
+    if (this.bMyTurn) {
+      if (this.#bInCheck) {
+        // Show CHECK text.
+        Game.scene.checkText.setText(this.color + ' in check');
+      } else {
+        // Remove CHECK text.
+        Game.scene.checkText.setText('');
+      }
+    } else {
+      if (this.opponentPlayer.#bInCheck) {
+        // Show CHECK text.
+        Game.scene.checkText.setText(this.opponentPlayer.color + ' in check');
+      } else {
+        // Remove CHECK text.
+        Game.scene.checkText.setText('');
+      }
+    }
   }
 
   setTurnIndicator() {
@@ -1656,7 +1730,6 @@ class ChessPlayer {
   }
 
   checkForCheck(boardToTest, teamColor) {
-    // TODOB: use struct
     let ourKingPosition = new GridPosition();
 
     // Go through the board and find our KING's position.
@@ -2009,9 +2082,8 @@ class ChessPlayerAI extends ChessPlayer {
           let gameState = that.preTurn();
           if (gameState == Game.gameState.Normal || gameState == Game.gameState.Check) {
             that.takeATurn();
-            //Indicators to help the human player.
-            // TODO
-            //that.showCheckWarning();
+            // Indicators to help the human player.
+            that.showCheckWarning();
             that.setTurnIndicator();
           } else if (gameState == Game.gameState.Checkmate || gameState == Game.gameState.Stalemate) {
             // We have an end to the game, so let the game over canvas show the player.
@@ -2120,16 +2192,16 @@ class ChessPlayerAI extends ChessPlayer {
     this.minimaxMoves[key] = this.getAllMoveOptions(tempBoard, this.color);
 
     if (this.minimaxMoves[key].length > 0) {
-      //Go through all move options and return the one with the maximum score.
+      // Go through all move options and return the one with the maximum score.
       for (let i = 0; i < this.minimaxMoves[key].length; i++) {
         let opponentPiece = boardToTest.boardLayout[this.minimaxMoves[key][i].toRow][this.minimaxMoves[key][i].toCol];
         if (opponentPiece.pieceType == Game.pieceType.King && opponentPiece.pieceColor != this.color) {
           continue;
         }
 
-        //Only check if our best highest is less than parent's low, otherwise stop.
-        //Any further checks resulting positively will only get higher and therefore be
-        //higher than the parent low, which means they will be discarded.
+        // Only check if our best highest is less than parent's low, otherwise stop.
+        // Any further checks resulting positively will only get higher and therefore be
+        // higher than the parent low, which means they will be discarded.
         if (bestValue > parentLow) {
           //console.log("MAXIMISE: Pruned");
           return bestValue;
@@ -2356,7 +2428,7 @@ class ChessGameOverOptions {
         this.winnerText = "BLACK wins!\nCHECKMATE";
       }
     } else if (gameState == Game.gameState.Stalemate) {
-      this.winnerText = "Its a Draw!\nSTALEMATE";
+      this.winnerText = "It's a Draw!\nSTALEMATE";
     }
   }
 }
