@@ -203,6 +203,23 @@ Encastling
 
    <div align="center">
      <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/castle1.png">
+     </a>
+   </div>
+   
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/castle5.png">
+     </a>
+     <p align="center">Castling to the left</p>
+   </div>
+
+|
+
+.. raw:: html
+
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
       <img src="./images/castle3.png">
      </a>
    </div>
