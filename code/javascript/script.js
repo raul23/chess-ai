@@ -357,6 +357,54 @@ class ChessBoard {
     piece.bCanEnPassant = false;
     piece.bHasMoved = false;
 
+    // Black Encastling
+    /*
+    if (row == 7) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+      if (column == 3) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+    }
+    if (row == 0) {
+      if (column == 3) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    */
+
+    // White Encastling
+    /*
+    if (row == 0) {
+      if (column == 0) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+      if (column == 3) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.King;
+      }
+      if (column == 7) {
+        piece.pieceColor = Game.pieceColor.White;
+        piece.pieceType = Game.pieceType.Rook;
+      }
+    }
+    if (row == 7) {
+      if (column == 3) {
+        piece.pieceColor = Game.pieceColor.Black;
+        piece.pieceType = Game.pieceType.King;
+      }
+    }
+    */
+
     // White in check
     /*
     if (row == 1) {
@@ -1146,7 +1194,7 @@ class ChessPlayer {
             }
 
             // CASTLING - Move the rook.
-            if (this.chessBoard.boardLayout[this.selectedPiecePosition.row, this.selectedPiecePosition.column].pieceType == Game.pieceType.King) {
+            if (this.chessBoard.boardLayout[this.selectedPiecePosition.row][this.selectedPiecePosition.column].pieceType == Game.pieceType.King) {
               // Are we moving 2 spaces??? This indicates CASTLING.
               if (gridPosition.column - this.selectedPiecePosition.column == 2) {
                 // Moving 2 spaces to the right - Move the ROOK on the right into its new position.
@@ -2109,7 +2157,7 @@ class ChessPlayerAI extends ChessPlayer {
     if (this.chessBoard.boardLayout[move.fromRow][move.fromCol].pieceType == Game.pieceType.Pawn) {
       // If the pawn is on its start position and it double jumps, then en'passant may be available for opponent.
       if ((move.fromRow == 1 && move.toRow == 3) || (move.fromRow == 6 && move.toRow == 4)) {
-        this.chessBoard.boardLayout[move.fromRow, move.fromCol].bCanEnPassant = true;
+        this.chessBoard.boardLayout[move.fromRow][move.fromCol].bCanEnPassant = true;
       }
     }
 
@@ -2125,7 +2173,7 @@ class ChessPlayerAI extends ChessPlayer {
     }
 
     // CASTLING - Move the rook.
-    if (this.chessBoard.boardLayout[move.fromRow, move.fromCol].pieceType == Game.pieceType.King) {
+    if (this.chessBoard.boardLayout[move.fromRow][move.fromCol].pieceType == Game.pieceType.King) {
       // Are we moving 2 spaces??? This indicates CASTLING.
       if (move.toCol - move.fromCol == 2) {
         // Moving 2 spaces to the right - Move the ROOK on the right into its new position.
