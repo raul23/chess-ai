@@ -203,13 +203,13 @@ Encastling
 
    <div align="center">
      <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
-      <img src="./images/castle1.png">
+      <img src="./images/castle3.png">
      </a>
    </div>
    
    <div align="center">
      <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
-      <img src="./images/castle2.png">
+      <img src="./images/castle4.png">
      </a>
      <p align="center">Castling to the right</p>
    </div>
