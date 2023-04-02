@@ -183,11 +183,45 @@ Instructions
        <p align="center">Black Pawn promoted to Queen</p>
      </div>
 
+Special moves
+-------------
+Encastling
+""""""""""
+`:information_source:` From `chess.com <https://www.chess.com/terms/check-chess>`_
+
+ The king moves two spaces to the left or to the right, and the rook moves over and in front of the king, all in one move!
+ 
+ You can’t castle any time you want to, though. Here are the rules for castling: 
+ 
+ - Your king can not have moved
+ - Your rook can not have moved
+ - Your king can NOT be in check
+ - Your king can not pass through check
+ - No pieces can be between the king and rook
+
+.. raw:: html
+
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/castle1.png">
+     </a>
+   </div>
+   
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/castle2.png">
+     </a>
+     <p align="center">Castling to the right</p>
+   </div>
+
+En passant
+""""""""""
+
 Game states
 -----------
 Check
 """""
-`:information_source:` From `chess.com <https://www.chess.com/terms/checkmate-chess>`_
+`:information_source:` From `chess.com <https://www.chess.com/terms/check-chess>`_
 
  When a king is attacked, it is called check. **If a player is in check, they must get out of check!**
 
@@ -295,12 +329,6 @@ Things to be done
 -----------------
 In order of importance, these are the things still to be done for this Chess project:
   
-- Show a warning message if a player is in check
-  
-- Test the following moves:
-
-  - Encastling
-  - En passant
 - Add restart button: right now on `codepen.io <https://codepen.io/raul23/pen/eYLLJbJ>`_, you 
   have to click on Run (if not on fullscreen) or refresh the page
 - Highlight the clicked piece: when the user clicks on a piece, it should be highlighted and if they click another piece, then
