@@ -185,6 +185,21 @@ Instructions
 
 Game states
 -----------
+Check
+"""""
+`:information_source:` From `chess.com <https://www.chess.com/terms/checkmate-chess>`_
+
+ When a king is attacked, it is called check. **If a player is in check, they must get out of check!**
+
+.. raw:: html
+
+   <div align="center">
+     <a href="https://codepen.io/raul23/full/WNgPJJj" target="_blank">
+      <img src="./images/white_in_check.png">
+     </a>
+     <p align="center">White in check</p>
+   </div>
+
 Checkmate
 """""""""
 `:information_source:` From `chess.com <https://www.chess.com/terms/checkmate-chess>`_
